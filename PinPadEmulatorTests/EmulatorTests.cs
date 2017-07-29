@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PinPadEmulator;
 using PinPadEmulator.Commands.Requests;
-using System.Diagnostics;
 using System.Text;
 
 namespace PinPadEmulatorTests
@@ -24,13 +23,8 @@ namespace PinPadEmulatorTests
 			this.emulator.Handle<OpenRequest>(request => receivedRequest = request);
 
 			this.emulator.Input(0x16);
-			foreach(var data in Encoding.ASCII.GetBytes("OPN"))
-			{
-				this.emulator.Input(data);
-			}
-			this.emulator.Input(0x17);
-			this.emulator.Input(0xA8);
-			this.emulator.Input(0xA9);
+			this.emulator.Input(Encoding.ASCII.GetBytes("OPN"));
+			this.emulator.Input(0x17, 0xA8, 0xA9);
 
 			Assert.IsNotNull(receivedRequest);
 		}
@@ -44,13 +38,8 @@ namespace PinPadEmulatorTests
 			this.emulator.UnknownRequest += (command) => { receivedCommand = command; };
 
 			this.emulator.Input(0x16);
-			foreach (var data in Encoding.ASCII.GetBytes(expectedCommand))
-			{
-				this.emulator.Input(data);
-			}
-			this.emulator.Input(0x17);
-			this.emulator.Input(0x7C);
-			this.emulator.Input(0x32);
+			this.emulator.Input(Encoding.ASCII.GetBytes(expectedCommand));
+			this.emulator.Input(0x17, 0x7C, 0x32);
 
 			Assert.AreEqual(expectedCommand, receivedCommand);
 		}
@@ -59,18 +48,13 @@ namespace PinPadEmulatorTests
 		public void When_receiving_corrupt_OPN_should_invoke_corrupt_request()
 		{
 			var expectedCommand = "OPM";
-			
+
 			var receivedCommand = default(string);
 			this.emulator.CorruptRequest += (command) => { receivedCommand = command; };
 
 			this.emulator.Input(0x16);
-			foreach (var data in Encoding.ASCII.GetBytes(expectedCommand))
-			{
-				this.emulator.Input(data);
-			}
-			this.emulator.Input(0x17);
-			this.emulator.Input(0xA8);
-			this.emulator.Input(0xA9);
+			this.emulator.Input(Encoding.ASCII.GetBytes(expectedCommand));
+			this.emulator.Input(0x17, 0xA8, 0xA9);
 
 			Assert.AreEqual(expectedCommand, receivedCommand);
 		}
@@ -82,13 +66,8 @@ namespace PinPadEmulatorTests
 			this.emulator.UnhandledRequest += (request) => { unhandledRequest = request; };
 
 			this.emulator.Input(0x16);
-			foreach (var data in Encoding.ASCII.GetBytes("OPN"))
-			{
-				this.emulator.Input(data);
-			}
-			this.emulator.Input(0x17);
-			this.emulator.Input(0xA8);
-			this.emulator.Input(0xA9);
+			this.emulator.Input(Encoding.ASCII.GetBytes("OPN"));
+			this.emulator.Input(0x17, 0xA8, 0xA9);
 
 			Assert.IsNotNull(unhandledRequest);
 		}

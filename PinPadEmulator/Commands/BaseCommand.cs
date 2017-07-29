@@ -1,4 +1,5 @@
 ﻿using PinPadEmulator.Fields;
+using PinPadEmulator.Utils;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,6 +9,8 @@ namespace PinPadEmulator.Commands
 	public abstract class BaseCommand
 	{
 		protected const int IDENTIFIER_LENGTH = 3;
+
+		public abstract string Identifier { get; }
 
 		private readonly FieldInfo[] commandFieldInfos;
 
@@ -21,8 +24,8 @@ namespace PinPadEmulator.Commands
 			this.commandFieldInfos = implementedFields.Where(field => typeofIField.IsAssignableFrom(field.FieldType)).ToArray();
 		}
 
-		public abstract string Identifier { get; }
-		
+		public abstract void Init(StringReader stringReader);
+
 		protected IEnumerable<CommandBlock> CommandBlocks
 		{
 			get

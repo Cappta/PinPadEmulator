@@ -13,15 +13,15 @@ namespace PinPadEmulator.Fields
 			this.Format = format;
 		}
 
-		public override void Deserialize(StringReader stringReader)
+		public override void Init(StringReader stringReader)
 		{
 			var content = stringReader.Read(this.Format.Length);
 			this.Value = DateTime.ParseExact(content, this.Format, CultureInfo.InvariantCulture);
 		}
 
-		protected override string Serialize(DateTime value)
+		public override string ToString()
 		{
-			return value.ToString(this.Format);
+			return this.Value.ToString(this.Format);
 		}
 	}
 }

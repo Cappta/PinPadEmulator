@@ -29,6 +29,12 @@ namespace PinPadEmulator.Extensions
 
 			if (value == null) { return string.Empty; }
 
+			if (typeOfType == typeof(byte[]))
+			{
+				var byteArrayValue = (byte[])(object)value;
+				return byteArrayValue.ToHexString();
+			}
+
 			return value.ToString();
 		}
 	}

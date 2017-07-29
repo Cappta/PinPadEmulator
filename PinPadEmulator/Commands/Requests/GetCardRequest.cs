@@ -11,7 +11,7 @@ namespace PinPadEmulator.Commands.Requests
 		public readonly FixedLengthField<int> TransactionAmount = new FixedLengthField<int>(12);
 		public readonly DateTimeField TransactionDateTime = new DateTimeField("yyMMddhhmmss");
 		public readonly FixedLengthField<string> TableVersion = new FixedLengthField<string>(10);
-		public readonly FieldList<AidEntryReference> AidEntryReferences = new FieldList<AidEntryReference>(2, () => new AidEntryReference());
+		public readonly FieldList<AidEntryReference> AidEntryReferences = new FieldList<AidEntryReference>(2);
 		public readonly FixedLengthField<bool?> ContactlessOn = new FixedLengthField<bool?>(1).Optional();
 	}
 }

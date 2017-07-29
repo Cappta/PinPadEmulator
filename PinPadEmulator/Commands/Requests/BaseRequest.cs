@@ -1,15 +1,14 @@
 ﻿using PinPadEmulator.Extensions;
 using PinPadEmulator.Utils;
 using System;
+using System.Text;
 
 namespace PinPadEmulator.Commands.Requests
 {
 	public abstract class BaseRequest : BaseCommand
 	{
-		public void Init(StringReader stringReader)
+		public override void Init(StringReader stringReader)
 		{
-			this.Command = stringReader.Value;
-
 			var identifier = stringReader.Read(IDENTIFIER_LENGTH);
 			if (this.Identifier.EqualsIgnoreCase(identifier) == false)
 			{
@@ -18,10 +17,22 @@ namespace PinPadEmulator.Commands.Requests
 
 			foreach (var commandBlock in this.CommandBlocks)
 			{
-				commandBlock.Deserialize(stringReader);
+				commandBlock.Init(stringReader);
 			}
 		}
 
-		public string Command { get; private set; }
+		public override string ToString()
+		{
+			var stringBuilder = new StringBuilder();
+
+			stringBuilder.Append(this.Identifier);
+
+			foreach (var commandBlock in this.CommandBlocks)
+			{
+				stringBuilder.Append(commandBlock.ToString());
+			}
+
+			return stringBuilder.ToString();
+		}
 	}
 }

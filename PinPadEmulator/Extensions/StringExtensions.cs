@@ -1,4 +1,5 @@
-﻿using PinPadEmulator.Utils;
+﻿using PinPadEmulator.Commands;
+using PinPadEmulator.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -31,7 +32,33 @@ namespace PinPadEmulator.Extensions
 				return (T)(object)(intValue == 1);
 			}
 
+			if (typeOfT == typeof(byte[]))
+			{
+				return (T)(object)value.GetBytesFromHexString();
+			}
+
+			if(typeof(BaseCommand).IsAssignableFrom(typeOfT))
+			{
+				var instantiatedCommand = (BaseCommand)Activator.CreateInstance(typeOfT);
+				instantiatedCommand.Init(new StringReader(value));
+				return (T)(object)instantiatedCommand;
+			}
+
 			return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
+		}
+
+		public static bool TryConvertTo<T>(this string value, out T output)
+		{
+			try
+			{
+				output = value.ConvertTo<T>();
+				return true;
+			}
+			catch
+			{
+				output = default(T);
+				return false;
+			}
 		}
 
 		public static DateTime ConvertToDateTime(this string value, string format)

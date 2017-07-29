@@ -1,5 +1,6 @@
 ﻿using PinPadEmulator.Extensions;
 using PinPadEmulator.Utils;
+using System;
 
 namespace PinPadEmulator.Fields
 {
@@ -20,21 +21,30 @@ namespace PinPadEmulator.Fields
 			return this;
 		}
 
-		public override void Deserialize(StringReader stringReader)
+		public override void Init(StringReader stringReader)
 		{
-			if(this.optional && stringReader.Remaining < this.Length) { return; }
+			if (this.optional && stringReader.Remaining < this.Length) { return; }
 
 			var content = stringReader.Read(this.Length);
 			this.Value = content.ConvertTo<type>();
 		}
 
-		protected override string Serialize(type value)
+		public override string ToString()
 		{
-			var converted = base.Serialize(value);
+			var value = this.PadString(base.ToString());
 
-			if (value.IsNumericType()) { return converted.PadLeft(this.Length, '0'); }
+			if (value.Length > this.Length) { throw new InvalidOperationException($"Value length exceeds the field limit of {this.Length}"); }
 
-			return converted.PadRight(this.Length, ' ');
+			return value;
+		}
+
+		private string PadString(string value)
+		{
+			if (typeof(type) == typeof(byte[])) { return value.PadRight(this.Length, '0'); }
+
+			if (this.Value?.IsNumericType() == true) { return value.PadLeft(this.Length, '0'); }
+
+			return value.PadRight(this.Length, ' ');
 		}
 	}
 }

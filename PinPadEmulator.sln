@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulator", "PinPadEmu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulatorTests", "PinPadEmulatorTests\PinPadEmulatorTests.csproj", "{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadMocker", "PinPadMocker\PinPadMocker.csproj", "{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadMockerCLI", "PinPadMockerCLI\PinPadMockerCLI.csproj", "{F8F858C1-0CE8-44C8-92AE-A73A81732A19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

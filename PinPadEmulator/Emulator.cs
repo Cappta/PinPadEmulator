@@ -1,5 +1,6 @@
 ﻿using PinPadEmulator.Commands.Requests;
 using PinPadEmulator.Commands.Responses;
+using PinPadEmulator.Devices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,6 @@ namespace PinPadEmulator
 {
 	public class Emulator
 	{
-		private static readonly byte[] ABORT_ACKNOWLEDGE = new byte[] { 0x4 };
-		private static readonly byte[] ACKNOWLEDGE = new byte[] { 0x6 };
-		private static readonly byte[] NEGATIVE_ACKNOWLEDGE = new byte[] { 0x15 };
-
-		public event Action<byte[]> Output;
 		public event Action<string> CorruptRequest;
 		public event Action<string> UnknownRequest;
 		public event Action<BaseRequest> UnhandledRequest;
@@ -21,13 +17,19 @@ namespace PinPadEmulator
 
 		private readonly DataLink dataLink;
 		private readonly Deserializer deserializer;
+		private readonly IDevice device;
 
 		private int responseCounter = 0;
 
 		private Dictionary<Type, Action<BaseRequest>> typeHandlerDictionary = new Dictionary<Type, Action<BaseRequest>>();
 
-		public Emulator()
+		public Emulator(IDevice device)
 		{
+			if (device == null) { throw new ArgumentNullException(nameof(device)); }
+
+			this.device = device;
+			this.device.Output += this.OnDeviceOutput;
+
 			this.dataLink = new DataLink();
 			this.deserializer = new Deserializer();
 
@@ -36,14 +38,9 @@ namespace PinPadEmulator
 			this.dataLink.AbortRequested += this.OnAbortRequested;
 		}
 
-		public void Input(byte data)
-		{
-			this.dataLink.Input(data);
-		}
-
 		private void OnCommandReceived(string command)
 		{
-			this.Output?.Invoke(ACKNOWLEDGE);
+			this.DeviceInput(ByteFlag.PACKET_ACKNOWLEDGE);
 
 			var request = this.deserializer.Deserialize(command);
 
@@ -54,14 +51,14 @@ namespace PinPadEmulator
 
 		private void OnCorruptCommandReceived(string command)
 		{
-			this.Output?.Invoke(NEGATIVE_ACKNOWLEDGE);
+			this.DeviceInput(ByteFlag.PACKET_NEGATIVE_ACKNOWLEDGE);
 
 			this.CorruptRequest?.Invoke(command);
 		}
 
 		private void OnAbortRequested()
 		{
-			this.Output?.Invoke(ABORT_ACKNOWLEDGE);
+			this.DeviceInput(ByteFlag.ABORT_ACKNOWLEDGE);
 
 			this.AbortRequested?.Invoke();
 		}
@@ -97,12 +94,22 @@ namespace PinPadEmulator
 			this.UnhandledRequest?.Invoke(request);
 		}
 
-		public void Send(BaseResponse response)
+		public void Respond(BaseResponse response)
 		{
 			this.responseCounter++;
 
 			var command = response.ToString();
-			this.Output?.Invoke(this.dataLink.Encapsulate(command).ToArray());
+			this.DeviceInput(Checksum.Encapsulate(command).ToArray());
+		}
+
+		private void OnDeviceOutput(byte[] data)
+		{
+			this.dataLink.Input(data);
+		}
+
+		private void DeviceInput(params byte[] data)
+		{
+			this.device.Input(data);
 		}
 	}
 }

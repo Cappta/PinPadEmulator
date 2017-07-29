@@ -19,7 +19,7 @@ namespace PinPadEmulator.Commands.Responses
 		public readonly FixedLengthField<string> ApplicationLabel = new FixedLengthField<string>(16);
 		public readonly FixedLengthField<int> ServiceCode = new FixedLengthField<int>(3);
 		public readonly FixedLengthField<string> CardHolderName = new FixedLengthField<string>(26);
-		public readonly DateTimeField CardExpirationDate = new DateTimeField("yyMMdd");
+		public readonly OptionalDateTimeField CardExpirationDate = new OptionalDateTimeField("yyMMdd");
 		public readonly PaddedVariableLengthField<string> ExternalCardNumber = new PaddedVariableLengthField<string>(2, 19);
 		public readonly FixedLengthField<int> EletronicCoinAcceptorBalance = new FixedLengthField<int>(8);
 		public readonly FixedLengthField<int> IssuerCountryCode = new FixedLengthField<int>(3);

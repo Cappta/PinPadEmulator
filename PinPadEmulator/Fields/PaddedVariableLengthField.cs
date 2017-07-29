@@ -15,7 +15,7 @@ namespace PinPadEmulator.Fields
 
 		private int TotalLength { get { return this.HeaderLength + this.ContentLength; } }
 
-		public override void Deserialize(StringReader stringReader)
+		public override void Init(StringReader stringReader)
 		{
 			var headerContent = stringReader.Read(this.HeaderLength);
 			var contentLength = headerContent.ConvertTo<int>();
@@ -26,9 +26,9 @@ namespace PinPadEmulator.Fields
 			stringReader.Seek(this.ContentLength - content.Length);
 		}
 
-		protected override string Serialize(type value)
+		public override string ToString()
 		{
-			var converted = base.Serialize(value);
+			var converted = base.ToString();
 
 			if(converted.Length > this.TotalLength) { throw new ArgumentOutOfRangeException($"Exceeded field length"); }
 

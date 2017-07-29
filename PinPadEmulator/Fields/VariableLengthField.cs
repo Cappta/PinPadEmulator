@@ -16,7 +16,7 @@ namespace PinPadEmulator.Fields
 			this.MaximumContentLength = maximumContentLength;
 		}
 
-		public override void Deserialize(StringReader stringReader)
+		public override void Init(StringReader stringReader)
 		{
 			var headerContent = stringReader.Read(this.HeaderLength);
 			var contentLength = headerContent.ConvertTo<int>();
@@ -31,9 +31,9 @@ namespace PinPadEmulator.Fields
 			this.Value = content.ConvertTo<type>();
 		}
 
-		protected override string Serialize(type value)
+		public override string ToString()
 		{
-			var converted = base.Serialize(value);
+			var converted = base.ToString();
 
 			var stringBuilder = new StringBuilder();
 			stringBuilder.Append(converted.Length.ToString(this.HeaderLength));

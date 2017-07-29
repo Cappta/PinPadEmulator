@@ -54,6 +54,7 @@
     <Compile Include="EmulatorTests.cs" />
     <Compile Include="Requests\GetCardRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\GetPinRequestTests.cs" />
     <Compile Include="Requests\OpenRequestTests.cs" />
     <Compile Include="Responses\GetCardResponseTests.cs" />
     <Compile Include="Responses\OpenResponseTests.cs" />

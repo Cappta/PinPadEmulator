@@ -16,20 +16,17 @@ namespace PinPadEmulator.Fields
 			this.commandFields = commandFieldInfos.Select(fieldInfo => fieldInfo.GetValue(this) as IField).ToArray();
 		}
 
-		public string Serialized
-		{
-			get
-			{
-				return string.Join("", this.commandFields.Select(field => field.Serialized));
-			}
-		}
-
-		public void Deserialize(StringReader stringReader)
+		public void Init(StringReader stringReader)
 		{
 			foreach (var field in this.commandFields)
 			{
-				field.Deserialize(stringReader);
+				field.Init(stringReader);
 			}
+		}
+
+		public override string ToString()
+		{
+			return string.Join("", this.commandFields.Select(field => field.ToString()));
 		}
 	}
 }

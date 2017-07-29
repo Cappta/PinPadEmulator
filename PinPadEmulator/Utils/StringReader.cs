@@ -20,7 +20,7 @@ namespace PinPadEmulator.Utils
 		public string Read(int length)
 		{
 			if (length > this.Remaining) { throw new ArgumentOutOfRangeException(nameof(length)); }
-			if (length == 0) { return default(string); }
+			if (length == 0) { return string.Empty; }
 
 			var value = this.Value.Substring(this.Offset, length);
 			this.Offset += length;

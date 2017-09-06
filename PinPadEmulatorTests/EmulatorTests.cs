@@ -1,6 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSubstitute;
 using PinPadEmulator;
 using PinPadEmulator.Commands.Requests;
+using PinPadEmulator.Devices;
+using System;
 using System.Text;
 
 namespace PinPadEmulatorTests
@@ -8,12 +11,19 @@ namespace PinPadEmulatorTests
 	[TestClass]
 	public class EmulatorTests
 	{
+		IDevice device;
 		Emulator emulator;
 
 		[TestInitialize]
 		public void Initialize()
 		{
-			this.emulator = new Emulator();
+			this.device = Substitute.For<IDevice>();
+			this.device.When(d => d.Input(Arg.Any<byte[]>())).Do(data =>
+			{
+				this.device.Output += Raise.Event<Action<byte[]>>(data.Arg<byte[]>());
+			});
+
+			this.emulator = new Emulator(this.device);
 		}
 
 		[TestMethod]
@@ -22,9 +32,9 @@ namespace PinPadEmulatorTests
 			var receivedRequest = default(BaseRequest);
 			this.emulator.Handle<OpenRequest>(request => receivedRequest = request);
 
-			this.emulator.Input(0x16);
-			this.emulator.Input(Encoding.ASCII.GetBytes("OPN"));
-			this.emulator.Input(0x17, 0xA8, 0xA9);
+			this.device.Input(0x16);
+			this.device.Input(Encoding.ASCII.GetBytes("OPN"));
+			this.device.Input(0x17, 0xA8, 0xA9);
 
 			Assert.IsNotNull(receivedRequest);
 		}
@@ -37,9 +47,9 @@ namespace PinPadEmulatorTests
 			var receivedCommand = default(string);
 			this.emulator.UnknownRequest += (command) => { receivedCommand = command; };
 
-			this.emulator.Input(0x16);
-			this.emulator.Input(Encoding.ASCII.GetBytes(expectedCommand));
-			this.emulator.Input(0x17, 0x7C, 0x32);
+			this.device.Input(0x16);
+			this.device.Input(Encoding.ASCII.GetBytes(expectedCommand));
+			this.device.Input(0x17, 0x7C, 0x32);
 
 			Assert.AreEqual(expectedCommand, receivedCommand);
 		}
@@ -52,9 +62,9 @@ namespace PinPadEmulatorTests
 			var receivedCommand = default(string);
 			this.emulator.CorruptRequest += (command) => { receivedCommand = command; };
 
-			this.emulator.Input(0x16);
-			this.emulator.Input(Encoding.ASCII.GetBytes(expectedCommand));
-			this.emulator.Input(0x17, 0xA8, 0xA9);
+			this.device.Input(0x16);
+			this.device.Input(Encoding.ASCII.GetBytes(expectedCommand));
+			this.device.Input(0x17, 0xA8, 0xA9);
 
 			Assert.AreEqual(expectedCommand, receivedCommand);
 		}
@@ -65,9 +75,9 @@ namespace PinPadEmulatorTests
 			var unhandledRequest = default(BaseRequest);
 			this.emulator.UnhandledRequest += (request) => { unhandledRequest = request; };
 
-			this.emulator.Input(0x16);
-			this.emulator.Input(Encoding.ASCII.GetBytes("OPN"));
-			this.emulator.Input(0x17, 0xA8, 0xA9);
+			this.device.Input(0x16);
+			this.device.Input(Encoding.ASCII.GetBytes("OPN"));
+			this.device.Input(0x17, 0xA8, 0xA9);
 
 			Assert.IsNotNull(unhandledRequest);
 		}

@@ -6,6 +6,6 @@ namespace PinPadEmulator.Commands.Responses
 	{
 		public override string Identifier => "DWK";
 
-		public readonly FixedLengthField<byte[]> Cryptogram = new FixedLengthField<byte[]>(256);
+		public FixedLengthField<byte[]> Cryptogram { get; } = new FixedLengthField<byte[]>(256);
 	}
 }

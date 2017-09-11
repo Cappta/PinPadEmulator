@@ -6,10 +6,10 @@ namespace PinPadEmulator.Commands.Requests
 	{
 		public override string Identifier => "GPN";
 
-		public readonly FixedLengthField<CryptoMethod> Method = new FixedLengthField<CryptoMethod>(1);
-		public readonly FixedLengthField<int> MasterKeyIndex = new FixedLengthField<int>(2);
-		public readonly FixedLengthField<byte[]> EncryptedWorkingKey = new FixedLengthField<byte[]>(32);
-		public readonly VariableLengthField<string> Pan = new VariableLengthField<string>(2, 19);
-		public readonly FieldList<GetPinEntry> Entries = new FieldList<GetPinEntry>(1);
+		public FixedLengthField<CryptoMethod> Method { get; } = new FixedLengthField<CryptoMethod>(1);
+		public FixedLengthField<int> MasterKeyIndex { get; } = new FixedLengthField<int>(2);
+		public FixedLengthField<byte[]> EncryptedWorkingKey { get; } = new FixedLengthField<byte[]>(32);
+		public VariableLengthField<string> Pan { get; } = new VariableLengthField<string>(2, 19);
+		public FieldList<GetPinEntry> Entries { get; } = new FieldList<GetPinEntry>(1);
 	}
 }

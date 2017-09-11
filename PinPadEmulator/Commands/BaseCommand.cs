@@ -12,16 +12,16 @@ namespace PinPadEmulator.Commands
 
 		public abstract string Identifier { get; }
 
-		private readonly FieldInfo[] commandFieldInfos;
+		private readonly PropertyInfo[] commandPropInfos;
 
 		public BaseCommand()
 		{
 			var typeofIField = typeof(IField);
 
 			var members = this.GetType().GetMembers();
-			var fields = members.OfType<FieldInfo>();
-			var implementedFields = fields.Where(field => field.DeclaringType?.BaseType != typeof(BaseCommand));
-			this.commandFieldInfos = implementedFields.Where(field => typeofIField.IsAssignableFrom(field.FieldType)).ToArray();
+			var properties = members.OfType<PropertyInfo>();
+			var implementedProps = properties.Where(field => field.DeclaringType?.BaseType != typeof(BaseCommand));
+			this.commandPropInfos = implementedProps.Where(field => typeofIField.IsAssignableFrom(field.PropertyType)).ToArray();
 		}
 
 		public abstract void Init(StringReader stringReader);
@@ -30,12 +30,12 @@ namespace PinPadEmulator.Commands
 		{
 			get
 			{
-				if (this.commandFieldInfos.Count() == 0) { yield break; }
+				if (this.commandPropInfos.Count() == 0) { yield break; }
 
 				var commandBlock = new CommandBlock();
-				foreach (var fieldInfo in this.commandFieldInfos)
+				foreach (var fieldInfo in this.commandPropInfos)
 				{
-					var field = fieldInfo.GetValue(this) as IField;
+					var field = fieldInfo.GetGetMethod().Invoke(this, null) as IField;
 					commandBlock.Append(field);
 				}
 				yield return commandBlock;

@@ -8,7 +8,7 @@ namespace PinPadEmulator.Commands.Responses
 {
 	public abstract class BaseResponse : BaseCommand
 	{
-		public readonly FixedLengthField<int> Status = new FixedLengthField<int>(3);
+		public FixedLengthField<int> Status { get; } = new FixedLengthField<int>(3);
 
 		public override void Init(StringReader stringReader)
 		{

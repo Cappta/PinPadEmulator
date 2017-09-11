@@ -4,7 +4,7 @@ namespace PinPadEmulator.Commands
 {
 	public class AidEntryReference : FieldGroup
 	{
-		public readonly FixedLengthField<int> AcquirerId = new FixedLengthField<int>(2);
-		public readonly FixedLengthField<int> RecordIndex = new FixedLengthField<int>(2);
+		public FixedLengthField<int> AcquirerId { get; } = new FixedLengthField<int>(2);
+		public FixedLengthField<int> RecordIndex { get; } = new FixedLengthField<int>(2);
 	}
 }

@@ -155,8 +155,7 @@ namespace PinPadEmulator.Crypto
 
 			this.encryptedPanDictionary.Add(encryptedPan, pan);
 			this.decryptedPanDictionary.Add(pan, encryptedPan);
-
-			var test = this.DecryptPan(encryptedPan);
+			
 			return encryptedPan;
 		}
 

@@ -1,8 +1,6 @@
-﻿using PinPadEmulator.Commands;
-using PinPadEmulator.Commands.Requests;
+﻿using PinPadEmulator.Commands.Requests;
 using PinPadEmulator.Commands.Responses;
 using PinPadEmulator.Extensions;
-using PinPadEmulator.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -105,11 +103,11 @@ namespace PinPadEmulator.Crypto
 			return command;
 		}
 
-		public abstract string Handle(string command);
+		public abstract BaseResponse Handle(string command);
 
 		private string DecryptPan(string encryptedPan)
 		{
-			if(string.IsNullOrWhiteSpace(encryptedPan) || this.WorkingKey == null) { return encryptedPan; }
+			if (string.IsNullOrWhiteSpace(encryptedPan) || this.WorkingKey == null) { return encryptedPan; }
 			if (this.encryptedPanToPanDictionary.ContainsKey(encryptedPan)) { return this.encryptedPanToPanDictionary[encryptedPan]; }
 
 			var tripleDesEngine = new TripleDESCryptoServiceProvider() { Key = this.workingKey, Mode = CipherMode.ECB, Padding = PaddingMode.None };
@@ -146,14 +144,14 @@ namespace PinPadEmulator.Crypto
 
 			var replacedWhiteSpace = lastDigits.Replace(" ", "E");
 			var paddedPan = replacedWhiteSpace.PadRight(ENCRYPTED_PAN_BLOCK_LENGTH, 'F');
-			var decryptedPanData= paddedPan.GetBytesFromHexString();
+			var decryptedPanData = paddedPan.GetBytesFromHexString();
 			var encryptedPanData = encryptor.TransformFinalBlock(decryptedPanData, 0, decryptedPanData.Length);
 			var encryptedlastDigits = encryptedPanData.ToHexString();
 
 			var encryptedPan = firstDigits + encryptedlastDigits;
 
 			this.CacheEncryptedPan(pan, encryptedPan);
-			
+
 			return encryptedPan;
 		}
 

@@ -33,7 +33,7 @@ namespace PinPadEmulator.Devices
 			var cryptoHandled = this.CryptographyHandler.Handle(command);
 			if (cryptoHandled != null)
 			{
-				this.Reply(Checksum.Encapsulate(cryptoHandled).ToArray());
+				this.Reply(Checksum.Encapsulate(cryptoHandled.ToString()).ToArray());
 				return;
 			}
 			this.CommandReceived?.Invoke(this.CryptographyHandler.Undo(command));

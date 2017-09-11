@@ -4,6 +4,7 @@ using Org.BouncyCastle.Math;
 using PinPadEmulator.Commands;
 using PinPadEmulator.Commands.Requests;
 using PinPadEmulator.Commands.Responses;
+using PinPadEmulator.Extensions;
 using PinPadEmulator.Utils;
 using System.Security.Cryptography;
 using System.Text;
@@ -19,10 +20,8 @@ namespace PinPadEmulator.Crypto
 
 		public override string Undo(string command)
 		{
-			if (command.StartsWith("DWK2632"))
+			if (command.TryConvertTo(out DefineRsaWorkingKeyRequest dwkRequest))
 			{
-				var dwkRequest = new DefineRsaWorkingKeyRequest();
-				dwkRequest.Init(new StringReader(command));
 				this.requestRSAParameters = new RSAParameters()
 				{
 					Modulus = dwkRequest.Modulus.Value,
@@ -35,16 +34,14 @@ namespace PinPadEmulator.Crypto
 				dwkRequest.Exponent.Value = this.responseRSAParameters.Exponent;
 				return dwkRequest.ToString();
 			}
-			else if (command.StartsWith("DWK000256"))
+			else if (command.TryConvertTo(out DefineRsaWorkingKeyResponse dwkResponse))
 			{
-				var dwkResponse = new DefineRsaWorkingKeyResponse();
-				dwkResponse.Init(new StringReader(command));
-
-				var privateRsaParameters = new RsaPrivateCrtKeyParameters(new BigInteger(1, this.responseRSAParameters.Modulus),
-					new BigInteger(1, this.responseRSAParameters.Exponent), new BigInteger(1, this.responseRSAParameters.D),
-					new BigInteger(1, this.responseRSAParameters.P), new BigInteger(1, this.responseRSAParameters.Q),
-					new BigInteger(1, this.responseRSAParameters.DP), new BigInteger(1, this.responseRSAParameters.DQ),
-					new BigInteger(1, this.responseRSAParameters.InverseQ));
+				var privateRsaParameters = new RsaPrivateCrtKeyParameters(
+					new BigInteger(1, this.responseRSAParameters.Modulus), new BigInteger(1, this.responseRSAParameters.Exponent),
+					new BigInteger(1, this.responseRSAParameters.D), new BigInteger(1, this.responseRSAParameters.P),
+					new BigInteger(1, this.responseRSAParameters.Q), new BigInteger(1, this.responseRSAParameters.DP),
+					new BigInteger(1, this.responseRSAParameters.DQ), new BigInteger(1, this.responseRSAParameters.InverseQ)
+				);
 				var rsaEngine = new RsaEngine();
 				rsaEngine.Init(false, privateRsaParameters);
 
@@ -63,7 +60,7 @@ namespace PinPadEmulator.Crypto
 			return base.Undo(command);
 		}
 
-		public override string Handle(string command)
+		public override BaseResponse Handle(string command)
 		{
 			return null;
 		}

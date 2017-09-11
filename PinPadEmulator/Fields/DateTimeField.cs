@@ -6,12 +6,12 @@ namespace PinPadEmulator.Fields
 {
 	public class DateTimeField : Field<DateTime>
 	{
-		public readonly string Format;
-
 		public DateTimeField(string format)
 		{
 			this.Format = format;
 		}
+
+		public string Format { get; }
 
 		public override void Init(StringReader stringReader)
 		{

@@ -7,12 +7,12 @@ namespace PinPadEmulator.Fields
 {
 	public class FieldList<type> : List<type>, IField where type : IField, new()
 	{
-		public readonly int HeaderLength;
-
 		public FieldList(int headerLength)
 		{
 			this.HeaderLength = headerLength;
 		}
+
+		public int HeaderLength { get; }
 
 		public void Init(StringReader stringReader)
 		{

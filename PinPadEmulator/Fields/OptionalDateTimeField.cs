@@ -6,14 +6,14 @@ namespace PinPadEmulator.Fields
 {
 	public class OptionalDateTimeField : Field<DateTime?>
 	{
-		public readonly string Format;
-		public readonly string invalidValue;
-
 		public OptionalDateTimeField(string format)
 		{
 			this.Format = format;
 			this.invalidValue = new string('0', this.Format.Length);
 		}
+
+		public string Format { get; }
+		public string invalidValue { get; }
 
 		public override void Init(StringReader stringReader)
 		{

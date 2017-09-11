@@ -6,12 +6,12 @@ namespace PinPadEmulator.Fields
 {
 	public class PaddedVariableLengthField<type> : VariableLengthField<type>
 	{
-		public readonly int ContentLength;
-
 		public PaddedVariableLengthField(int headerLength, int contentLength) : base(headerLength)
 		{
 			this.ContentLength = contentLength;
 		}
+
+		public int ContentLength { get; }
 
 		private int TotalLength { get { return this.HeaderLength + this.ContentLength; } }
 

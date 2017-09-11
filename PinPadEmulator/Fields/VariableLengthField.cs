@@ -7,14 +7,14 @@ namespace PinPadEmulator.Fields
 {
 	public class VariableLengthField<type> : Field<type>
 	{
-		public readonly int HeaderLength;
-		public readonly Nullable<int> MaximumContentLength;
-
 		public VariableLengthField(int headerLength, Nullable<int> maximumContentLength = default(Nullable<int>))
 		{
 			this.HeaderLength = headerLength;
 			this.MaximumContentLength = maximumContentLength;
 		}
+
+		public int HeaderLength { get; }
+		public Nullable<int> MaximumContentLength { get; }
 
 		public override void Init(StringReader stringReader)
 		{

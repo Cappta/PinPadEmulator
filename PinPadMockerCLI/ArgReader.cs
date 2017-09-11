@@ -6,10 +6,6 @@ namespace PinPadMockerCLI
 {
 	public class ArgReader
 	{
-		public readonly Dictionary<Regex, string> RegexPatterns;
-		public readonly string[] Flags;
-		public readonly string[] SerialPorts;
-
 		public ArgReader(string[] args)
 		{
 			if (args == null) { throw new ArgumentNullException(nameof(args)); }
@@ -18,6 +14,10 @@ namespace PinPadMockerCLI
 			this.Flags = this.LoadWithIdentifier(args, "+");
 			this.SerialPorts = this.LoadWithIdentifier(args, "@");
 		}
+
+		public Dictionary<Regex, string> RegexPatterns { get; }
+		public string[] Flags { get; }
+		public string[] SerialPorts { get; }
 
 		private Dictionary<Regex, string> LoadRegexPatterns(string[] args)
 		{

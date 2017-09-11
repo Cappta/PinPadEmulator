@@ -6,13 +6,14 @@ namespace PinPadEmulator.Fields
 {
 	public class FixedLengthField<type> : Field<type>
 	{
-		public readonly int Length;
 		private bool optional;
 
 		public FixedLengthField(int length)
 		{
 			this.Length = length;
 		}
+
+		public int Length { get; }
 
 		public FixedLengthField<type> Optional()
 		{

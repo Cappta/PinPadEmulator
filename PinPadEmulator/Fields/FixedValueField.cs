@@ -5,13 +5,13 @@ namespace PinPadEmulator.Fields
 {
 	public class FixedValueField<type> : IField
 	{
-		public readonly Field<type> field;
-
 		public FixedValueField(type value, Field<type> field)
 		{
 			this.field = field;
 			this.field.Value = value;
 		}
+
+		public Field<type> field { get; }
 
 		public type Value
 		{

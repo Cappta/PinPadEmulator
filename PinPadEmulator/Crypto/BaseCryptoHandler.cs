@@ -103,7 +103,10 @@ namespace PinPadEmulator.Crypto
 			return command;
 		}
 
-		public abstract BaseResponse Handle(string command);
+		public virtual BaseResponse Handle(string command)
+		{
+			return null;
+		}
 
 		private string DecryptPan(string encryptedPan)
 		{

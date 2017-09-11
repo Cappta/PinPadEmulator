@@ -110,7 +110,7 @@ namespace PinPadEmulator.Crypto
 		private string DecryptPan(string encryptedPan)
 		{
 			if(string.IsNullOrWhiteSpace(encryptedPan) || this.WorkingKey == null) { return encryptedPan; }
-			if (this.encryptedPanDictionary.ContainsKey(encryptedPan) == true) { return this.encryptedPanDictionary[encryptedPan]; }
+			if (this.encryptedPanDictionary.ContainsKey(encryptedPan)) { return this.encryptedPanDictionary[encryptedPan]; }
 
 			var tripleDesEngine = new TripleDESCryptoServiceProvider() { Key = this.workingKey, Mode = CipherMode.ECB, Padding = PaddingMode.None };
 			var decryptor = tripleDesEngine.CreateDecryptor();
@@ -136,7 +136,7 @@ namespace PinPadEmulator.Crypto
 		private string EncryptPan(string pan)
 		{
 			if (string.IsNullOrWhiteSpace(pan) || this.WorkingKey == null) { return pan; }
-			if (this.decryptedPanDictionary.ContainsKey(pan) == true) { return this.decryptedPanDictionary[pan]; }
+			if (this.decryptedPanDictionary.ContainsKey(pan)) { return this.decryptedPanDictionary[pan]; }
 
 			var tripleDesEngine = new TripleDESCryptoServiceProvider() { Key = this.workingKey, Mode = CipherMode.ECB, Padding = PaddingMode.None };
 			var encryptor = tripleDesEngine.CreateEncryptor();

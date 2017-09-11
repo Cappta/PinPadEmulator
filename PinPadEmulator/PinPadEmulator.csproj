@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{59DDEAAA-7343-4707-8A94-A4A383D26234}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PinPadEmulator</RootNamespace>
+    <AssemblyName>PinPadEmulator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ByteFlag.cs" />
+    <Compile Include="Checksum.cs" />
+    <Compile Include="Commands\CryptoMethod.cs" />
+    <Compile Include="Commands\DecryptedRsaCryptogram.cs" />
+    <Compile Include="Commands\GetPinEntry.cs" />
+    <Compile Include="Commands\Requests\DefineRsaWorkingKeyRequest.cs" />
+    <Compile Include="Commands\Requests\GetPinRequest.cs" />
+    <Compile Include="Commands\Responses\DefineRsaWorkingKeyResponse.cs" />
+    <Compile Include="Crypto\ActiveCryptoHandler.cs" />
+    <Compile Include="Crypto\PassiveCryptoHandler.cs" />
+    <Compile Include="Crypto\BaseCryptoHandler.cs" />
+    <Compile Include="Crypto\ICryptoHandler.cs" />
+    <Compile Include="Deserializer.cs" />
+    <Compile Include="DataLink.cs" />
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\CardType.cs" />
+    <Compile Include="Commands\ChipStatus.cs" />
+    <Compile Include="Devices\DeviceOutputBuffer.cs" />
+    <Compile Include="Devices\DecryptedDevice.cs" />
+    <Compile Include="Devices\IDevice.cs" />
+    <Compile Include="Devices\RegexSimulatedDevice.cs" />
+    <Compile Include="Devices\SerialDevice.cs" />
+    <Compile Include="Devices\VirtualDevice.cs" />
+    <Compile Include="Emulator.cs" />
+    <Compile Include="Extensions\ByteArrayExtension.cs" />
+    <Compile Include="Extensions\GenericExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Fields\CommandBlock.cs" />
+    <Compile Include="Fields\OptionalDateTimeField.cs" />
+    <Compile Include="Fields\DateTimeField.cs" />
+    <Compile Include="Fields\Field.cs" />
+    <Compile Include="Fields\FieldGroup.cs" />
+    <Compile Include="Fields\FieldList.cs" />
+    <Compile Include="Fields\FixedLengthField.cs" />
+    <Compile Include="Fields\FixedValueField.cs" />
+    <Compile Include="Fields\IField.cs" />
+    <Compile Include="Fields\PaddedVariableLengthField.cs" />
+    <Compile Include="Fields\VariableLengthField.cs" />
+    <Compile Include="Interceptor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commands\AidEntryReference.cs" />
+    <Compile Include="Commands\Requests\BaseRequest.cs" />
+    <Compile Include="Commands\Requests\GetCardRequest.cs" />
+    <Compile Include="Commands\Requests\OpenRequest.cs" />
+    <Compile Include="Commands\Responses\BaseResponse.cs" />
+    <Compile Include="Commands\Responses\GetCardResponse.cs" />
+    <Compile Include="Commands\Responses\OpenResponse.cs" />
+    <Compile Include="Utils\StringReader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

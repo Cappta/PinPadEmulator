@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulator", "PinPadEmulator\PinPadEmulator.csproj", "{59DDEAAA-7343-4707-8A94-A4A383D26234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulatorTests", "PinPadEmulatorTests\PinPadEmulatorTests.csproj", "{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadMocker", "PinPadMocker\PinPadMocker.csproj", "{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadMockerCLI", "PinPadMockerCLI\PinPadMockerCLI.csproj", "{F8F858C1-0CE8-44C8-92AE-A73A81732A19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59DDEAAA-7343-4707-8A94-A4A383D26234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59DDEAAA-7343-4707-8A94-A4A383D26234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59DDEAAA-7343-4707-8A94-A4A383D26234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59DDEAAA-7343-4707-8A94-A4A383D26234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

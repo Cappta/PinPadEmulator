@@ -27,14 +27,14 @@ namespace PinPadEmulator.Crypto
 			set
 			{
 				this.workingKey = value;
-				this.encryptedPanDictionary.Clear();
-				this.decryptedPanDictionary.Clear();
+				this.encryptedPanToPanDictionary.Clear();
+				this.panToEncryptedPanDictionary.Clear();
 				this.WorkingKeyDefined?.Invoke(value);
 			}
 		}
 
-		private Dictionary<string, string> encryptedPanDictionary = new Dictionary<string, string>();
-		private Dictionary<string, string> decryptedPanDictionary = new Dictionary<string, string>();
+		private Dictionary<string, string> encryptedPanToPanDictionary = new Dictionary<string, string>();
+		private Dictionary<string, string> panToEncryptedPanDictionary = new Dictionary<string, string>();
 
 		public virtual string Undo(string command)
 		{
@@ -110,7 +110,7 @@ namespace PinPadEmulator.Crypto
 		private string DecryptPan(string encryptedPan)
 		{
 			if(string.IsNullOrWhiteSpace(encryptedPan) || this.WorkingKey == null) { return encryptedPan; }
-			if (this.encryptedPanDictionary.ContainsKey(encryptedPan)) { return this.encryptedPanDictionary[encryptedPan]; }
+			if (this.encryptedPanToPanDictionary.ContainsKey(encryptedPan)) { return this.encryptedPanToPanDictionary[encryptedPan]; }
 
 			var tripleDesEngine = new TripleDESCryptoServiceProvider() { Key = this.workingKey, Mode = CipherMode.ECB, Padding = PaddingMode.None };
 			var decryptor = tripleDesEngine.CreateDecryptor();
@@ -125,18 +125,17 @@ namespace PinPadEmulator.Crypto
 			var restoredWhiteSpaces = Regex.Replace(decryptedlastDigits, @"[eE]", " ");
 			var cleanLastDigits = Regex.Replace(restoredWhiteSpaces, @"[fF]", "");
 
-			var decryptedPan = firstDigits + cleanLastDigits;
+			var pan = firstDigits + cleanLastDigits;
 
-			this.encryptedPanDictionary.Add(encryptedPan, decryptedPan);
-			this.decryptedPanDictionary.Add(decryptedPan, encryptedPan);
+			this.CacheEncryptedPan(pan, encryptedPan);
 
-			return decryptedPan;
+			return pan;
 		}
 
 		private string EncryptPan(string pan)
 		{
 			if (string.IsNullOrWhiteSpace(pan) || this.WorkingKey == null) { return pan; }
-			if (this.decryptedPanDictionary.ContainsKey(pan)) { return this.decryptedPanDictionary[pan]; }
+			if (this.panToEncryptedPanDictionary.ContainsKey(pan)) { return this.panToEncryptedPanDictionary[pan]; }
 
 			var tripleDesEngine = new TripleDESCryptoServiceProvider() { Key = this.workingKey, Mode = CipherMode.ECB, Padding = PaddingMode.None };
 			var encryptor = tripleDesEngine.CreateEncryptor();
@@ -153,10 +152,15 @@ namespace PinPadEmulator.Crypto
 
 			var encryptedPan = firstDigits + encryptedlastDigits;
 
-			this.encryptedPanDictionary.Add(encryptedPan, pan);
-			this.decryptedPanDictionary.Add(pan, encryptedPan);
+			this.CacheEncryptedPan(pan, encryptedPan);
 			
 			return encryptedPan;
+		}
+
+		private void CacheEncryptedPan(string pan, string encryptedPan)
+		{
+			this.encryptedPanToPanDictionary.Add(encryptedPan, pan);
+			this.panToEncryptedPanDictionary.Add(pan, encryptedPan);
 		}
 
 		private string ExtractPanWithRegex(string input, Regex regex)

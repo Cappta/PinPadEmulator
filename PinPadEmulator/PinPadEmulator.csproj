@@ -59,6 +59,8 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CardType.cs" />
     <Compile Include="Commands\ChipStatus.cs" />
+    <Compile Include="Devices\DeviceBuffer.cs" />
+    <Compile Include="Devices\DeviceInputBuffer.cs" />
     <Compile Include="Devices\DeviceOutputBuffer.cs" />
     <Compile Include="Devices\DecryptedDevice.cs" />
     <Compile Include="Devices\IDevice.cs" />

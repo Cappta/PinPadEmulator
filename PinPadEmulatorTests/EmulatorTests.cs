@@ -2,6 +2,7 @@
 using NSubstitute;
 using PinPadEmulator;
 using PinPadEmulator.Commands.Requests;
+using PinPadEmulator.Crypto;
 using PinPadEmulator.Devices;
 using System;
 using System.Text;
@@ -11,19 +12,23 @@ namespace PinPadEmulatorTests
 	[TestClass]
 	public class EmulatorTests
 	{
-		IDevice device;
-		Emulator emulator;
+		private IDevice device;
+
+		private ICryptoHandler cryptoHandler;
+
+		private Emulator emulator;
 
 		[TestInitialize]
 		public void Initialize()
 		{
 			this.device = Substitute.For<IDevice>();
+			this.cryptoHandler = Substitute.For<ICryptoHandler>();
 			this.device.When(d => d.Input(Arg.Any<byte[]>())).Do(data =>
 			{
 				this.device.Output += Raise.Event<Action<byte[]>>(data.Arg<byte[]>());
 			});
 
-			this.emulator = new Emulator(this.device);
+			this.emulator = new Emulator(this.device, this.cryptoHandler);
 		}
 
 		[TestMethod]

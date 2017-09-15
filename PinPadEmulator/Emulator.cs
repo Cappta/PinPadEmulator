@@ -52,7 +52,7 @@ namespace PinPadEmulator
 				return;
 			}
 
-			var request = this.deserializer.Deserialize(command);
+			var request = this.deserializer.Deserialize(this.cryptoHandler.Undo(command));
 			if (request == null) { this.UnknownRequest?.Invoke(command); return; }
 
 			this.RouteRequest(request);

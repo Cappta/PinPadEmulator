@@ -2,8 +2,6 @@
 {
 	public class DeviceOutputBuffer : DeviceBuffer
 	{
-		private readonly IDevice device;
-
 		public DeviceOutputBuffer(IDevice device)
 			: base(device)
 		{

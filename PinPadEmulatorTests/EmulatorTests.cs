@@ -23,12 +23,14 @@ namespace PinPadEmulatorTests
 		{
 			this.device = Substitute.For<IDevice>();
 			this.cryptoHandler = Substitute.For<ICryptoHandler>();
+			this.emulator = new Emulator(this.device, this.cryptoHandler);
+
+			this.cryptoHandler.Undo(Arg.Any<string>()).Returns((callInfo) => callInfo.Arg<string>());
+
 			this.device.When(d => d.Input(Arg.Any<byte[]>())).Do(data =>
 			{
 				this.device.Output += Raise.Event<Action<byte[]>>(data.Arg<byte[]>());
 			});
-
-			this.emulator = new Emulator(this.device, this.cryptoHandler);
 		}
 
 		[TestMethod]

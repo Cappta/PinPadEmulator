@@ -1,5 +1,6 @@
 ﻿using PinPadEmulator.Commands.Requests;
 using PinPadEmulator.Commands.Responses;
+using PinPadEmulator.Crypto;
 using PinPadEmulator.Devices;
 using System;
 using System.Collections.Generic;
@@ -18,14 +19,16 @@ namespace PinPadEmulator
 		private readonly DataLink dataLink;
 		private readonly Deserializer deserializer;
 		private readonly IDevice device;
+		private readonly ICryptoHandler cryptoHandler;
 
 		private int responseCounter = 0;
 
 		private Dictionary<Type, Action<BaseRequest>> typeHandlerDictionary = new Dictionary<Type, Action<BaseRequest>>();
 
-		public Emulator(IDevice device)
+		public Emulator(IDevice device, ICryptoHandler cryptoHandler)
 		{
-			if (device == null) { throw new ArgumentNullException(nameof(device)); }
+			this.device = device ?? throw new ArgumentNullException(nameof(device));
+			this.cryptoHandler = cryptoHandler ?? throw new ArgumentNullException(nameof(cryptoHandler));
 
 			this.device = device;
 			this.device.Output += this.OnDeviceOutput;
@@ -42,8 +45,14 @@ namespace PinPadEmulator
 		{
 			this.DeviceInput(ByteFlag.PACKET_ACKNOWLEDGE);
 
-			var request = this.deserializer.Deserialize(command);
+			var cryptoHandled = this.cryptoHandler.Handle(command);
+			if (cryptoHandled != null)
+			{
+				this.DeviceInput(Checksum.Encapsulate(cryptoHandled.ToString()).ToArray());
+				return;
+			}
 
+			var request = this.deserializer.Deserialize(this.cryptoHandler.Undo(command));
 			if (request == null) { this.UnknownRequest?.Invoke(command); return; }
 
 			this.RouteRequest(request);
@@ -99,7 +108,7 @@ namespace PinPadEmulator
 			this.responseCounter++;
 
 			var command = response.ToString();
-			this.DeviceInput(Checksum.Encapsulate(command).ToArray());
+			this.DeviceInput(Checksum.Encapsulate(this.cryptoHandler.Redo(command)).ToArray());
 		}
 
 		private void OnDeviceOutput(byte[] data)

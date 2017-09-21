@@ -8,6 +8,11 @@
 		}
 
 		public void Write(params byte[] data)
-			=> this.Device.Input(data);
+		{
+			lock (this.Buffer)
+			{
+				foreach (var item in data) { this.Buffer.Enqueue(item); }
+			}
+		}
 	}
 }

@@ -46,16 +46,20 @@ namespace PinPadEmulator.Crypto
 				rsaEngine.Init(false, privateRsaParameters);
 
 				var processedBlock = rsaEngine.ProcessBlock(dwkResponse.Cryptogram.Value, 0, dwkResponse.Cryptogram.Value.Length);
+
 				var decryptedRsaCryptogram = new DecryptedRsaCryptogram();
 				decryptedRsaCryptogram.Init(new StringReader(Encoding.ASCII.GetString(processedBlock)));
+
 				this.WorkingKey = decryptedRsaCryptogram.WorkingKey.Value;
 
 				var publicRsaParameters = new RsaKeyParameters(false, 
 					new BigInteger(1, this.requestedRSAParameters.Modulus), new BigInteger(1, this.requestedRSAParameters.Exponent)
 				);
+
 				rsaEngine.Init(true, publicRsaParameters);
 				var unprocessedBlock = Encoding.ASCII.GetBytes(decryptedRsaCryptogram.ToString());
 				dwkResponse.Cryptogram.Value = rsaEngine.ProcessBlock(unprocessedBlock, 0, unprocessedBlock.Length);
+
 				return dwkResponse.ToString();
 			}
 			return base.Undo(command);

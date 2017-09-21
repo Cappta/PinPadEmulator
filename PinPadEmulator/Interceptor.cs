@@ -21,17 +21,17 @@ namespace PinPadEmulator
 			if (virtualDevice == null) { throw new ArgumentNullException(nameof(virtualDevice)); }
 			if (realDevice == null) { throw new ArgumentNullException(nameof(realDevice)); }
 
-			this.virtualLink = new DataLink();
-			this.virtualLink.CommandReceived += this.OnVirtualLinkCommandReceived;
-
-			this.realLink = new DataLink();
-			this.realLink.CommandReceived += this.OnRealLinkCommandReceived;
-
 			this.virtualDevice = virtualDevice;
 			this.virtualDevice.Output += this.OnVirtualDeviceOutput;
 
+			this.virtualLink = new DataLink();
+			this.virtualLink.CommandReceived += this.OnVirtualLinkCommandReceived;
+
 			this.realDevice = realDevice;
 			this.realDevice.Output += this.OnRealDeviceOutput;
+
+			this.realLink = new DataLink();
+			this.realLink.CommandReceived += this.OnRealLinkCommandReceived;
 		}
 
 		private void OnVirtualLinkCommandReceived(string command)

@@ -4,6 +4,7 @@ using PinPadEmulator.Crypto;
 using PinPadEmulator.Devices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -44,6 +45,8 @@ namespace PinPadEmulator
 		private void OnCommandReceived(string command)
 		{
 			this.DeviceInput(ByteFlag.PACKET_ACKNOWLEDGE);
+
+			Debug.WriteLine($"REQUEST: {command}");
 
 			var cryptoHandled = this.cryptoHandler.Handle(command);
 			if (cryptoHandled != null)
@@ -108,6 +111,8 @@ namespace PinPadEmulator
 			this.responseCounter++;
 
 			var command = response.ToString();
+			Debug.WriteLine($"RESPONSE: {command}");
+
 			this.DeviceInput(Checksum.Encapsulate(this.cryptoHandler.Redo(command)).ToArray());
 		}
 

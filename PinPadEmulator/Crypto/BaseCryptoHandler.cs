@@ -166,7 +166,7 @@ namespace PinPadEmulator.Crypto
 
 		private string ExtractPanWithRegex(string input, Regex regex)
 		{
-			if (regex.IsMatch(input) == false) { return null; }
+			if (String.IsNullOrWhiteSpace(input) || regex.IsMatch(input) == false) { return null; }
 
 			var match = regex.Match(input);
 

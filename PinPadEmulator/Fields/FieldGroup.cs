@@ -1,19 +1,19 @@
 ﻿using PinPadEmulator.Utils;
+using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace PinPadEmulator.Fields
 {
 	public class FieldGroup : IField
 	{
-		private readonly IField[] commandProps;
+		private readonly IEnumerable<IField> commandProps;
 
 		public FieldGroup()
 		{
-			var members = this.GetType().GetMembers();
-			var properties = members.OfType<PropertyInfo>();
-			var commandPropInfos = properties.Where(field => field.PropertyType.GetInterfaces().Contains(typeof(IField))).ToArray();
-			this.commandProps = commandPropInfos.Select(fieldInfo => fieldInfo.GetGetMethod().Invoke(this, null) as IField).ToArray();
+			var props = this.GetType().GetProperties()
+				.Where(prop => typeof(IField).IsAssignableFrom(prop.PropertyType));
+
+			this.commandProps = props.Select(prop => prop.GetValue(this, null) as IField);
 		}
 
 		public void Init(StringReader stringReader)

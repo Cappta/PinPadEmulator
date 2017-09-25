@@ -9,7 +9,7 @@ namespace PinPadEmulatorTests.Requests
 	public class GoOnChipRequestTests
 	{
 		[TestMethod]
-		public void TestGetCardRequest()
+		public void TestGoOnChipRequest()
 		{
 			var request = new GoOnChipRequest();
 			request.Init(new StringReader("GOC086000000000010000000000000011316000000000000000000000000000000001000000000000000000000000590285F2A82959A9C9F029F109F1A9F1E9F269F339F369F379F279F345F34003000"));
@@ -28,8 +28,8 @@ namespace PinPadEmulatorTests.Requests
 			Assert.AreEqual(new string('0', 8), request.Treshould.ToString());
 			Assert.AreEqual(0, request.MaxTargetPercentage.Value);
 			Assert.AreEqual(null, request.AcquirerData.Value);
-			Assert.AreEqual("0285F2A82959A9C9F029F109F1A9F1E9F269F339F369F379F279F345F34", request.EMVTags.Value);
-			Assert.AreEqual("000", request.OptionalEMVTags.Value);
+			Assert.AreEqual("0590285F2A82959A9C9F029F109F1A9F1E9F269F339F369F379F279F345F34", request.RequiredTags.ToString());
+			Assert.AreEqual("003000", request.OptionalTags.ToString());
 		}
 	}
 }

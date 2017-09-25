@@ -23,20 +23,7 @@ namespace PinPadEmulator.Fields
 			var content = stringReader.Read(contentLength);
 			var contentReader = new StringReader(content);
 			
-			var tagFields = new List<IField>();
-
-			foreach (var field in this.fieldCollection)
-			{
-				if (contentReader.Remaining == 0) { tagFields.Add(field); }
-				else { field.Init(contentReader); }
-			}
-
-			if (stringReader.Remaining == 0) { return; }
-
-			var tags = stringReader.Read(stringReader.Remaining);
-			var tagsReader = new StringReader(content);
-
-			foreach (var field in tagFields) { field.Init(tagsReader); }
+			foreach (var field in this.fieldCollection) { field.Init(contentReader); }
 		}
 
 		public override string ToString()

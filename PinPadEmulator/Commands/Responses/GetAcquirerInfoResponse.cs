@@ -9,6 +9,6 @@ namespace PinPadEmulator.Commands.Responses
 		public FixedLengthField<string> AcquirerName { get; } = new FixedLengthField<string>(20);
 		public FixedLengthField<string> AcquirerApplicationVersion { get; } = new FixedLengthField<string>(13);
 		public FixedLengthField<string> AcquirerInfo { get; } = new FixedLengthField<string>(7);
-		public VariableLengthField<byte[]> AcquirerSAMId { get; } = new VariableLengthField<byte[]>(2);
+		public HexVariableLengthField AcquirerSAMId { get; } = new HexVariableLengthField(2);
 	}
 }

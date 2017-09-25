@@ -20,7 +20,8 @@ namespace PinPadEmulator.Commands.Requests
 		public FixedLengthField<byte[]> Treshould { get; } = new FixedLengthField<byte[]>(8);
 		public FixedLengthField<int> MaxTargetPercentage { get; } = new FixedLengthField<int>(2);
 		public VariableLengthField<string> AcquirerData { get; } = new VariableLengthField<string>(3, 32);
-		public VariableLengthField<string> EMVTags { get; } = new VariableLengthField<string>(3, 259);
-		public VariableLengthField<string> OptionalEMVTags { get; } = new VariableLengthField<string>(3, 259);
+
+		public EMVTags RequiredTags { get; } = new EMVTags();
+		public EMVTags OptionalTags { get; } = new EMVTags();
 	}
 }

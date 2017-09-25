@@ -48,7 +48,9 @@
     <Compile Include="Commands\ContactlessCapability.cs" />
     <Compile Include="Commands\CryptoMethod.cs" />
     <Compile Include="Commands\DecryptedRsaCryptogram.cs" />
+    <Compile Include="Commands\EMVTags.cs" />
     <Compile Include="Commands\GetPinEntry.cs" />
+    <Compile Include="Commands\GoOnChipDecision.cs" />
     <Compile Include="Commands\IssuerType.cs" />
     <Compile Include="Commands\Requests\CloseRequest.cs" />
     <Compile Include="Commands\Requests\DefineRsaWorkingKeyRequest.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="Commands\Requests\TableLoadEndRequest.cs" />
     <Compile Include="Commands\Requests\TableLoadInitRequest.cs" />
     <Compile Include="Commands\Requests\TableLoadRecRequest.cs" />
+    <Compile Include="Commands\Responses\NotificationMessageResponse.cs" />
     <Compile Include="Commands\Responses\RemoveCardResponse.cs" />
     <Compile Include="Commands\Responses\CloseResponse.cs" />
     <Compile Include="Commands\Responses\DefineRsaWorkingKeyResponse.cs" />
@@ -78,8 +81,7 @@
     <Compile Include="Commands\Responses\TableLoadInitResponse.cs" />
     <Compile Include="Commands\Responses\TableLoadRecResponse.cs" />
     <Compile Include="Commands\TableAIDEntry.cs" />
-    <Compile Include="Commands\TableEntry.cs" />
-    <Compile Include="Commands\TablePublicKeyEntry.cs" />
+    <Compile Include="Commands\TableCAPKEntry.cs" />
     <Compile Include="Commands\TableRevokedCertificateEntry.cs" />
     <Compile Include="Commands\TerminalType.cs" />
     <Compile Include="Commands\TransactionResult.cs" />
@@ -108,6 +110,8 @@
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Fields\CommandBlock.cs" />
+    <Compile Include="Fields\FieldTableLoadRegitryList.cs" />
+    <Compile Include="Fields\HexVariableLengthField.cs" />
     <Compile Include="Fields\OptionalDateTimeField.cs" />
     <Compile Include="Fields\DateTimeField.cs" />
     <Compile Include="Fields\Field.cs" />

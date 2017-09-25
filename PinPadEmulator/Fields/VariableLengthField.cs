@@ -13,13 +13,12 @@ namespace PinPadEmulator.Fields
 			this.MaximumContentLength = maximumContentLength;
 		}
 
-		public int HeaderLength { get; }
+		public virtual int HeaderLength { get; }
 		public Nullable<int> MaximumContentLength { get; }
 
 		public override void Init(StringReader stringReader)
 		{
-			var headerContent = stringReader.Read(this.HeaderLength);
-			var contentLength = headerContent.ConvertTo<int>();
+			int contentLength = ReadRawHeader(stringReader);
 
 			var content = stringReader.Read(contentLength);
 
@@ -31,15 +30,25 @@ namespace PinPadEmulator.Fields
 			this.Value = content.ConvertTo<type>();
 		}
 
+		protected virtual int ReadRawHeader(StringReader stringReader)
+		{
+			var headerContent = stringReader.Read(this.HeaderLength);
+			return headerContent.ConvertTo<int>();
+		}
+
 		public override string ToString()
 		{
 			var converted = base.ToString();
+			var header = this.CalculateHeaderLength(converted);
 
 			var stringBuilder = new StringBuilder();
-			stringBuilder.Append(converted.Length.ToString(this.HeaderLength));
+			stringBuilder.Append(header.ToString(this.HeaderLength));
 			stringBuilder.Append(converted);
 
 			return stringBuilder.ToString();
 		}
+
+		protected virtual int CalculateHeaderLength(string converted)
+			 => converted.Length;
 	}
 }

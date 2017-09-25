@@ -14,7 +14,7 @@ namespace PinPadEmulator.Fields
 
 		public int HeaderLength { get; }
 
-		public void Init(StringReader stringReader)
+		public virtual void Init(StringReader stringReader)
 		{
 			var headerContent = stringReader.Read(this.HeaderLength);
 			var fieldCount = headerContent.ConvertTo<int>();

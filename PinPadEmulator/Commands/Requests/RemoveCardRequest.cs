@@ -6,6 +6,6 @@ namespace PinPadEmulator.Commands.Requests
 	{
 		public override string Identifier => "RMC";
 
-		public VariableLengthField<string> Message { get; } = new VariableLengthField<string>(3, 32);
+		public FixedLengthField<string> Message { get; } = new FixedLengthField<string>(32);
 	}
 }

@@ -10,36 +10,73 @@ namespace PinPadEmulator.Commands
 	{
 		protected const int IDENTIFIER_LENGTH = 3;
 
-		public abstract string Identifier { get; }
-
-		private readonly PropertyInfo[] commandPropInfos;
+		private readonly IEnumerable<PropertyInfo> fields;
 
 		public BaseCommand()
 		{
-			var typeofIField = typeof(IField);
-
-			var members = this.GetType().GetMembers();
-			var properties = members.OfType<PropertyInfo>();
-			var implementedProps = properties.Where(field => field.DeclaringType?.BaseType != typeof(BaseCommand));
-			this.commandPropInfos = implementedProps.Where(field => typeofIField.IsAssignableFrom(field.PropertyType)).ToArray();
+			this.fields = this.ExtractFields(this);
 		}
 
-		public abstract void Init(StringReader stringReader);
+		public abstract string Identifier { get; }
 
 		protected IEnumerable<CommandBlock> CommandBlocks
 		{
 			get
 			{
-				if (this.commandPropInfos.Count() == 0) { yield break; }
+				if (this.fields.Count() == 0) { yield break; }
 
-				var commandBlock = new CommandBlock();
-				foreach (var fieldInfo in this.commandPropInfos)
+				var fields = this.ExtractSimpleFields();
+				if (fields.Count() > 0) { yield return this.CreateMainCommandBlock(fields); }
+
+				var commandBlockProps = this.ExtractCommandBlocks();
+				if (commandBlockProps.Count() == 0) { yield break; }
+
+				foreach (var commandBlockProp in commandBlockProps)
 				{
-					var field = fieldInfo.GetGetMethod().Invoke(this, null) as IField;
-					commandBlock.Append(field);
+					yield return CreateSubCommandBlock(commandBlockProp);
 				}
-				yield return commandBlock;
 			}
 		}
+
+		private IEnumerable<PropertyInfo> ExtractSimpleFields()
+			=> this.fields.Where(field => typeof(CommandBlock).IsAssignableFrom(field.PropertyType) == false);
+
+		private IEnumerable<PropertyInfo> ExtractCommandBlocks()
+			=> this.fields.Where(field => typeof(CommandBlock).IsAssignableFrom(field.PropertyType));
+
+		private CommandBlock CreateMainCommandBlock(IEnumerable<PropertyInfo> props)
+		{
+			var commandBlock = new CommandBlock();
+
+			foreach (var prop in props)
+			{
+				var field = prop.GetValue(this, null) as IField;
+				commandBlock.Append(field);
+			}
+
+			return commandBlock;
+		}
+
+		private CommandBlock CreateSubCommandBlock(PropertyInfo commandBlockProp)
+		{
+			var commandBlock = commandBlockProp.GetValue(this, null) as CommandBlock;
+
+			var props = this.ExtractFields(commandBlock);
+
+			foreach (var prop in props)
+			{
+				var field = prop.GetValue(commandBlock, null) as IField;
+				commandBlock.Append(field);
+			}
+
+			return commandBlock;
+		}
+
+		private IEnumerable<PropertyInfo> ExtractFields(object instance)
+			=> instance.GetType().GetProperties().Where(field
+				=> field.DeclaringType?.BaseType != typeof(BaseCommand)
+				&& typeof(IField).IsAssignableFrom(field.PropertyType));
+
+		public abstract void Init(StringReader stringReader);
 	}
 }

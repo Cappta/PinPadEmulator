@@ -71,8 +71,7 @@
     <Compile Include="Commands\Responses\TableLoadInitResponse.cs" />
     <Compile Include="Commands\Responses\TableLoadRecResponse.cs" />
     <Compile Include="Commands\TableAIDEntry.cs" />
-    <Compile Include="Commands\TableEntry.cs" />
-    <Compile Include="Commands\TablePublicKeyEntry.cs" />
+    <Compile Include="Commands\TableCAPKEntry.cs" />
     <Compile Include="Commands\TableRevokedCertificateEntry.cs" />
     <Compile Include="Commands\TerminalType.cs" />
     <Compile Include="Crypto\ActiveCryptoHandler.cs" />

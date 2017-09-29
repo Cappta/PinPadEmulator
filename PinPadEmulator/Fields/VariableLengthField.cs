@@ -25,7 +25,6 @@ namespace PinPadEmulator.Fields
         public override void Init(StringReader stringReader)
         {
             int contentLength = ReadContentLength(stringReader);
-
             var content = stringReader.Read(contentLength);
 
             if (this.MaximumContentLength.HasValue && content.Length > this.MaximumContentLength)
@@ -39,9 +38,9 @@ namespace PinPadEmulator.Fields
         protected int ReadContentLength(StringReader stringReader)
         {
             var headerContent = stringReader.Read(this.HeaderLength);
-            var header = headerContent.ConvertTo<int>();
+            var contentLength = headerContent.ConvertTo<int>();
 
-            return typeof(type) == typeof(byte[]) ? header * 2 : header;
+            return typeof(type) == typeof(byte[]) ? contentLength * 2 : contentLength;
         }
 
         public override string ToString()

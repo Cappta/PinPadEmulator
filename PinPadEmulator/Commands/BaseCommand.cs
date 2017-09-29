@@ -18,7 +18,7 @@ namespace PinPadEmulator.Commands
             if (fields.Count() == 0) { return; }
 
             var simpleFields = this.ExtractSimpleFields(fields);
-            if (fields.Count() > 0) { this.CommandBlocks.Add(this.CreateMainCommandBlock(fields)); }
+            if (fields.Count() > 0) { this.CommandBlocks.Add(this.CreateMainCommandBlock(simpleFields)); }
 
             var commandBlockProps = this.ExtractCommandBlocks(fields);
             if (commandBlockProps.Count() == 0) { return; }

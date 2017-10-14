@@ -55,6 +55,7 @@
     <Compile Include="Commands\Requests\CloseRequest.cs" />
     <Compile Include="Commands\Requests\DefineRsaWorkingKeyRequest.cs" />
     <Compile Include="Commands\Requests\DisplayMessageRequest.cs" />
+    <Compile Include="Commands\Requests\EncryptBufferRequest.cs" />
     <Compile Include="Commands\Requests\FinishChipRequest.cs" />
     <Compile Include="Commands\Requests\GetDUKPTRequest.cs" />
     <Compile Include="Commands\Requests\GetInfoRequest.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Commands\Requests\TableLoadEndRequest.cs" />
     <Compile Include="Commands\Requests\TableLoadInitRequest.cs" />
     <Compile Include="Commands\Requests\TableLoadRecRequest.cs" />
+    <Compile Include="Commands\Responses\EncryptBufferResponse.cs" />
     <Compile Include="Commands\Responses\NotificationMessageResponse.cs" />
     <Compile Include="Commands\Responses\RemoveCardResponse.cs" />
     <Compile Include="Commands\Responses\CloseResponse.cs" />

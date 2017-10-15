@@ -11,6 +11,6 @@ namespace PinPadEmulator.Commands.Requests
 		public FixedLengthField<string> AuthorizationResponseCode { get; } = new FixedLengthField<string>(2);
 		public HexVariableLengthField EMVData { get; } = new HexVariableLengthField(3, 512);
 		public FixedValueField<int> AcquirerData { get; } = new FixedValueField<int>(0, new FixedLengthField<int>(3));
-		public EMVTags Tags { get; } = new EMVTags();
+		public EmvTags Tags { get; } = new EmvTags();
 	}
 }

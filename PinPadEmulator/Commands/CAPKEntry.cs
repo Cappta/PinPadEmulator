@@ -2,10 +2,9 @@
 
 namespace PinPadEmulator.Commands
 {
-	public class TableCAPKEntry : FieldGroup
+	public class CapkEntry : FieldGroup
 	{
-		public FixedLengthField<int> Length { get; } = new FixedLengthField<int>(3);
-		public FixedLengthField<int> TableId { get; } = new FixedLengthField<int>(1);
+		public FixedValueField<int> TableId { get; } = new FixedValueField<int>(2, new FixedLengthField<int>(1));
 		public FixedLengthField<int> AcquirerId { get; } = new FixedLengthField<int>(2);
 		public FixedLengthField<int> EntryId { get; } = new FixedLengthField<int>(2);
 		public FixedLengthField<string> RID { get; } = new FixedLengthField<string>(10);

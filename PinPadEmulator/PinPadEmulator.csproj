@@ -44,11 +44,13 @@
   <ItemGroup>
     <Compile Include="ByteFlag.cs" />
     <Compile Include="Checksum.cs" />
+    <Compile Include="Commands\AidEasyEntryTibcV1Entry.cs" />
+    <Compile Include="Commands\AidNullEntry.cs" />
     <Compile Include="Commands\ApplicationPattern.cs" />
     <Compile Include="Commands\ContactlessCapability.cs" />
     <Compile Include="Commands\CryptoMethod.cs" />
     <Compile Include="Commands\DecryptedRsaCryptogram.cs" />
-    <Compile Include="Commands\EMVTags.cs" />
+    <Compile Include="Commands\EmvTags.cs" />
     <Compile Include="Commands\GetPinEntry.cs" />
     <Compile Include="Commands\GoOnChipDecision.cs" />
     <Compile Include="Commands\IssuerType.cs" />
@@ -82,9 +84,9 @@
     <Compile Include="Commands\Responses\TableLoadEndResponse.cs" />
     <Compile Include="Commands\Responses\TableLoadInitResponse.cs" />
     <Compile Include="Commands\Responses\TableLoadRecResponse.cs" />
-    <Compile Include="Commands\TableAIDEntry.cs" />
-    <Compile Include="Commands\TableCAPKEntry.cs" />
-    <Compile Include="Commands\TableRevokedCertificateEntry.cs" />
+    <Compile Include="Commands\AidIccEmvEntry.cs" />
+    <Compile Include="Commands\CapkEntry.cs" />
+    <Compile Include="Commands\RevokedCertificateEntry.cs" />
     <Compile Include="Commands\TerminalType.cs" />
     <Compile Include="Commands\TransactionResult.cs" />
     <Compile Include="Crypto\ActiveCryptoHandler.cs" />
@@ -112,7 +114,7 @@
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Fields\CommandBlock.cs" />
-    <Compile Include="Fields\FieldTableLoadRegitryList.cs" />
+    <Compile Include="Fields\HexPaddedVariableLengthField.cs" />
     <Compile Include="Fields\HexVariableLengthField.cs" />
     <Compile Include="Fields\OptionalDateTimeField.cs" />
     <Compile Include="Fields\DateTimeField.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="Fields\FixedValueField.cs" />
     <Compile Include="Fields\IField.cs" />
     <Compile Include="Fields\PaddedVariableLengthField.cs" />
+    <Compile Include="Fields\TableField.cs" />
     <Compile Include="Fields\VariableLengthField.cs" />
     <Compile Include="Interceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

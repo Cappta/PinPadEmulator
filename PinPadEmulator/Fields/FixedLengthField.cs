@@ -32,7 +32,7 @@ namespace PinPadEmulator.Fields
 
 		public override string ToString()
 		{
-			if (this.Value == null && this.optional) { return string.Empty; }
+			if(this.optional && (this.Value == null || this.Value.Equals(default(type)))) { return string.Empty; }
 
 			var value = this.PadString(base.ToString());
 

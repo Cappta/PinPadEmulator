@@ -21,7 +21,7 @@ namespace PinPadEmulator.Commands.Requests
 		public FixedLengthField<int> MaxTargetPercentage { get; } = new FixedLengthField<int>(2);
 		public VariableLengthField<string> AcquirerData { get; } = new VariableLengthField<string>(3, 32);
 
-		public EMVTags RequiredTags { get; } = new EMVTags();
-		public EMVTags OptionalTags { get; } = new EMVTags();
+		public EmvTags RequiredTags { get; } = new EmvTags();
+		public EmvTags OptionalTags { get; } = new EmvTags();
 	}
 }

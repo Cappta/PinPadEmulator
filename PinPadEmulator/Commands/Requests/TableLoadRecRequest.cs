@@ -6,6 +6,6 @@ namespace PinPadEmulator.Commands.Requests
 	{
 		public override string Identifier => "TLR";
 
-		public FieldTableLoadRegitryList Entries { get; } = new FieldTableLoadRegitryList(2);
+		public FieldList<TableField> Entries { get; } = new FieldList<TableField>(2);
 	}
 }

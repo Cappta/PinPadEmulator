@@ -14,29 +14,23 @@ namespace PinPadEmulator.Commands
 
 		public BaseCommand()
 		{
+			this.CommandBlocks = new List<CommandBlock>();
+
 			this.fields = this.ExtractFields(this);
+
+			var simpleFields = this.ExtractSimpleFields();
+			if (simpleFields.Count() > 0) { this.CommandBlocks.Add(this.CreateMainCommandBlock(simpleFields)); }
+
+			var commandBlocks = this.ExtractCommandBlocks();
+			foreach (var commandBlock in commandBlocks)
+			{
+				this.CommandBlocks.Add(CreateSubCommandBlock(commandBlock));
+			}
 		}
 
 		public abstract string Identifier { get; }
 
-		protected IEnumerable<CommandBlock> CommandBlocks
-		{
-			get
-			{
-				if (this.fields.Count() == 0) { yield break; }
-
-				var fields = this.ExtractSimpleFields();
-				if (fields.Count() > 0) { yield return this.CreateMainCommandBlock(fields); }
-
-				var commandBlockProps = this.ExtractCommandBlocks();
-				if (commandBlockProps.Count() == 0) { yield break; }
-
-				foreach (var commandBlockProp in commandBlockProps)
-				{
-					yield return CreateSubCommandBlock(commandBlockProp);
-				}
-			}
-		}
+		protected ICollection<CommandBlock> CommandBlocks { get; }
 
 		private IEnumerable<PropertyInfo> ExtractSimpleFields()
 			=> this.fields.Where(field => typeof(CommandBlock).IsAssignableFrom(field.PropertyType) == false);

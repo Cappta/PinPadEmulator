@@ -32,6 +32,8 @@ namespace PinPadEmulator.Fields
 
 		public override string ToString()
 		{
+			if (this.Value == null && this.optional) { return string.Empty; }
+
 			var value = this.PadString(base.ToString());
 
 			if (value.Length > this.Length) { throw new InvalidOperationException($"Value length exceeds the field limit of {this.Length}"); }

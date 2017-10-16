@@ -60,6 +60,7 @@
     <Compile Include="Requests\OpenRequestTests.cs" />
     <Compile Include="Requests\TableLoadRecRequestTests.cs" />
     <Compile Include="Responses\GetCardResponseTests.cs" />
+    <Compile Include="Responses\GetInfoResponseTests.cs" />
     <Compile Include="Responses\GoOnChipResponseTests.cs" />
     <Compile Include="Responses\OpenResponseTests.cs" />
   </ItemGroup>

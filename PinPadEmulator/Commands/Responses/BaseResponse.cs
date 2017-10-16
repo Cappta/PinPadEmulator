@@ -31,6 +31,9 @@ namespace PinPadEmulator.Commands.Responses
 
 			stringBuilder.Append(this.Identifier);
 			stringBuilder.Append(this.Status.ToString());
+
+			if (this.Status.Value != 0) { return stringBuilder.ToString(); }
+
 			foreach (var commandBlock in this.CommandBlocks)
 			{
 				stringBuilder.Append(commandBlock.ToString());

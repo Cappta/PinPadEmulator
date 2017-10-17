@@ -230,6 +230,7 @@ namespace PinPadMocker
 					file.WriteLine(request);
 					file.WriteLine(response);
 				}
+				this.AppendLog($"Saved {dialog.FileName}");
 			}
 		}
 
@@ -255,12 +256,14 @@ namespace PinPadMocker
 
 					this.requestResponseDictionary[request] = response;
 				}
+				this.AppendLog($"Loaded {dialog.FileName}");
 			}
 		}
 
 		private void UxButtonReset_Click(object sender, EventArgs e)
 		{
 			this.requestResponseDictionary.Clear();
+			this.UxTextLog.Text = "";
 		}
 	}
 }

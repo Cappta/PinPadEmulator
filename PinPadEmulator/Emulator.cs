@@ -111,9 +111,10 @@ namespace PinPadEmulator
 			this.responseCounter++;
 
 			var command = response.ToString();
-			Debug.WriteLine($"RESPONSE: {command}");
+			var redone = this.cryptoHandler.Redo(command);
+			Debug.WriteLine($"RESPONSE: {command} : {redone}");
 
-			this.DeviceInput(Checksum.Encapsulate(this.cryptoHandler.Redo(command)).ToArray());
+			this.DeviceInput(Checksum.Encapsulate(redone).ToArray());
 		}
 
 		private void OnDeviceOutput(byte[] data)

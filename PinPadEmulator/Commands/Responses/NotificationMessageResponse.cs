@@ -6,6 +6,6 @@ namespace PinPadEmulator.Commands.Responses
 	{
 		public override string Identifier => "NTM";
 
-		public FixedLengthField<string> Message { get; } = new FixedLengthField<string>(32);
+		public FixedLengthField<string> Message { get; } = new FixedLengthField<string>(29);
 	}
 }

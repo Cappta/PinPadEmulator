@@ -90,6 +90,7 @@
     <Compile Include="Commands\TerminalType.cs" />
     <Compile Include="Commands\TransactionResult.cs" />
     <Compile Include="Crypto\ActiveCryptoHandler.cs" />
+    <Compile Include="Crypto\NoCryptoHandler.cs" />
     <Compile Include="Crypto\PassiveCryptoHandler.cs" />
     <Compile Include="Crypto\BaseCryptoHandler.cs" />
     <Compile Include="Crypto\ICryptoHandler.cs" />

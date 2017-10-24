@@ -9,16 +9,19 @@ namespace PinPadEmulator.Fields
 		public PaddedVariableLengthField(int headerLength, int contentLength) : base(headerLength)
 		{
 			this.ContentLength = contentLength;
+
+			if (typeof(type) == typeof(byte[])) { this.PaddingChar = '0'; }
 		}
 
 		public int ContentLength { get; }
+
+		public char PaddingChar { get; } = ' ';
 
 		private int TotalLength { get { return this.HeaderLength + this.ContentLength; } }
 
 		public override void Init(StringReader stringReader)
 		{
-			var headerContent = stringReader.Read(this.HeaderLength);
-			var contentLength = headerContent.ConvertTo<int>();
+			var contentLength = this.ReadRawHeader(stringReader);
 
 			var content = stringReader.Read(contentLength);
 			this.Value = content.ConvertTo<type>();
@@ -32,7 +35,7 @@ namespace PinPadEmulator.Fields
 
 			if(converted.Length > this.TotalLength) { throw new ArgumentOutOfRangeException($"Exceeded field length"); }
 
-			return converted.PadRight(this.TotalLength, ' ');
+			return converted.PadRight(this.TotalLength, this.PaddingChar);
 		}
 	}
 }

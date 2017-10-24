@@ -30,10 +30,14 @@ namespace PinPadEmulator.Fields
 			this.Value = content.ConvertTo<type>();
 		}
 
-		protected virtual int ReadRawHeader(StringReader stringReader)
+		protected int ReadRawHeader(StringReader stringReader)
 		{
 			var headerContent = stringReader.Read(this.HeaderLength);
-			return headerContent.ConvertTo<int>();
+			var contentLength = headerContent.ConvertTo<int>();
+
+			if (typeof(type) == typeof(byte[])) { contentLength *= 2; }
+
+			return contentLength;
 		}
 
 		public override string ToString()
@@ -48,7 +52,11 @@ namespace PinPadEmulator.Fields
 			return stringBuilder.ToString();
 		}
 
-		protected virtual int CalculateHeaderLength(string converted)
-			 => converted.Length;
+		protected int CalculateHeaderLength(string converted)
+		{
+			if (typeof(type) == typeof(byte[])) { return converted.Length / 2; }
+
+			return converted.Length;
+		}
 	}
 }

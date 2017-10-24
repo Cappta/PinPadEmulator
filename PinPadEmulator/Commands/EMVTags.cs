@@ -4,6 +4,6 @@ namespace PinPadEmulator.Commands
 {
 	public class EmvTags : CommandBlock
 	{
-		public HexVariableLengthField Tags { get; } = new HexVariableLengthField(3, 256);
+		public VariableLengthField<byte[]> Tags { get; } = new VariableLengthField<byte[]>(3, 256);
 	}
 }

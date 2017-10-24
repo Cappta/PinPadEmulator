@@ -16,7 +16,7 @@ namespace PinPadEmulatorTests.Requests
 			Assert.AreEqual(0, getCardRequest.AcquirerId.Value);
 			Assert.AreEqual(0, getCardRequest.TargetAid.Value);
 			Assert.AreEqual(1000, getCardRequest.TransactionAmount.Value);
-			Assert.AreEqual("131207102355", getCardRequest.TransactionDateTime.Value.ToString("yyMMddHHmmss"));
+			Assert.AreEqual("131207102355", getCardRequest.TransactionDateTime.Value.Value.ToString("yyMMddHHmmss"));
 			Assert.AreEqual("8765234568", getCardRequest.TableVersion.Value);
 			Assert.AreEqual(3, getCardRequest.AidEntryReferences.Count);
 

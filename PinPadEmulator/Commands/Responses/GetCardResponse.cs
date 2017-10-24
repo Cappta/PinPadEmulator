@@ -19,7 +19,7 @@ namespace PinPadEmulator.Commands.Responses
 		public FixedLengthField<string> ApplicationLabel { get; } = new FixedLengthField<string>(16);
 		public FixedLengthField<int> ServiceCode { get; } = new FixedLengthField<int>(3);
 		public FixedLengthField<string> CardHolderName { get; } = new FixedLengthField<string>(26);
-		public OptionalDateTimeField CardExpirationDate { get; } = new OptionalDateTimeField("yyMMdd");
+		public DateTimeField CardExpirationDate { get; } = new DateTimeField("yyMMdd").Optional();
 
 		// Esse cara está ofuscado como GCR_RUF1 no documento da v199, além de ter o tamanho errado (Reportado como 39, mas é 29)
 		public PaddedVariableLengthField<string> ExternalCardNumber { get; } = new PaddedVariableLengthField<string>(2, 19);

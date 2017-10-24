@@ -115,9 +115,6 @@
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Fields\CommandBlock.cs" />
-    <Compile Include="Fields\HexPaddedVariableLengthField.cs" />
-    <Compile Include="Fields\HexVariableLengthField.cs" />
-    <Compile Include="Fields\OptionalDateTimeField.cs" />
     <Compile Include="Fields\DateTimeField.cs" />
     <Compile Include="Fields\Field.cs" />
     <Compile Include="Fields\FieldGroup.cs" />

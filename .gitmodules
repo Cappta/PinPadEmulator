@@ -1,0 +1,3 @@
+[submodule "PinPadSDK"]
+	path = PinPadSDK
+	url = https://github.com/Cappta/PinPadSDK.git

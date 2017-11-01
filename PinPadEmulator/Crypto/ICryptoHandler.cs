@@ -1,4 +1,4 @@
-﻿using PinPadEmulator.Commands.Responses;
+﻿using PinPadSDK.Commands.Responses;
 
 namespace PinPadEmulator.Crypto
 {

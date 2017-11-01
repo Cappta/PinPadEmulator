@@ -1,5 +1,5 @@
-﻿using PinPadEmulator.Devices;
-using PinPadEmulator.Extensions;
+﻿using PinPadSDK;
+using PinPadSDK.Devices;
 using System;
 using System.Diagnostics;
 
@@ -51,7 +51,7 @@ namespace PinPadEmulator
 			//Debug.WriteLine($"OnVirtualDeviceOutput: {dataCollection.ToHexString()}");
 			//foreach (var data in dataCollection)
 			//{
-				this.virtualLink.Input(dataCollection);
+			this.virtualLink.Input(dataCollection);
 			//}
 			this.realDevice.Input(dataCollection);
 		}
@@ -61,7 +61,7 @@ namespace PinPadEmulator
 			//Debug.WriteLine($"OnRealDeviceOutput: {dataCollection.ToHexString()}");
 			//foreach (var data in dataCollection)
 			//{
-				this.realLink.Input(dataCollection);
+			this.realLink.Input(dataCollection);
 			//}
 			this.virtualDevice.Input(dataCollection);
 		}

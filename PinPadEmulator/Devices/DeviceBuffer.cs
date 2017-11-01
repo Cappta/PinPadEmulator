@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PinPadSDK.Devices;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;

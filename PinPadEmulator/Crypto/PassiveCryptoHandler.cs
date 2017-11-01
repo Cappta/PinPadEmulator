@@ -1,11 +1,12 @@
 ﻿using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
-using PinPadEmulator.Commands;
-using PinPadEmulator.Commands.Requests;
-using PinPadEmulator.Commands.Responses;
 using PinPadEmulator.Extensions;
-using PinPadEmulator.Utils;
+using PinPadSDK;
+using PinPadSDK.Commands.Fields;
+using PinPadSDK.Commands.Requests;
+using PinPadSDK.Commands.Responses;
+using PinPadSDK.Extensions;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -52,7 +53,7 @@ namespace PinPadEmulator.Crypto
 
 				this.WorkingKey = decryptedRsaCryptogram.WorkingKey.Value;
 
-				var publicRsaParameters = new RsaKeyParameters(false, 
+				var publicRsaParameters = new RsaKeyParameters(false,
 					new BigInteger(1, this.requestedRSAParameters.Modulus), new BigInteger(1, this.requestedRSAParameters.Exponent)
 				);
 

@@ -3,6 +3,8 @@ using PinPadEmulator.Crypto;
 using PinPadEmulator.Devices;
 using PinPadEmulator.Extensions;
 using PinPadMocker.Properties;
+using PinPadSDK.Extensions;
+using PinPadSDK.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;

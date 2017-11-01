@@ -1,4 +1,6 @@
-﻿namespace PinPadEmulator.Devices
+﻿using PinPadSDK.Devices;
+
+namespace PinPadEmulator.Devices
 {
 	public class DeviceInputBuffer : DeviceBuffer
 	{

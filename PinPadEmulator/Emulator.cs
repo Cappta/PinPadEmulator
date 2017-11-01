@@ -1,7 +1,8 @@
-﻿using PinPadEmulator.Commands.Requests;
-using PinPadEmulator.Commands.Responses;
-using PinPadEmulator.Crypto;
-using PinPadEmulator.Devices;
+﻿using PinPadEmulator.Crypto;
+using PinPadSDK;
+using PinPadSDK.Commands.Requests;
+using PinPadSDK.Commands.Responses;
+using PinPadSDK.Devices;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +19,7 @@ namespace PinPadEmulator
 		public event Action AbortRequested;
 
 		private readonly DataLink dataLink;
-		private readonly Deserializer deserializer;
+		private readonly Deserializer<BaseRequest> deserializer;
 		private readonly IDevice device;
 		private readonly ICryptoHandler cryptoHandler;
 
@@ -35,7 +36,7 @@ namespace PinPadEmulator
 			this.device.Output += this.OnDeviceOutput;
 
 			this.dataLink = new DataLink();
-			this.deserializer = new Deserializer();
+			this.deserializer = new Deserializer<BaseRequest>();
 
 			this.dataLink.CommandReceived += this.OnCommandReceived;
 			this.dataLink.CorruptCommandReceived += this.OnCorruptCommandReceived;

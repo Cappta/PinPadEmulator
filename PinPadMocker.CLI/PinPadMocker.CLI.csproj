@@ -4,18 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{59DDEAAA-7343-4707-8A94-A4A383D26234}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PinPadEmulator</RootNamespace>
-    <AssemblyName>PinPadEmulator</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectGuid>{F8F858C1-0CE8-44C8-92AE-A73A81732A19}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PinPadMockerCLI</RootNamespace>
+    <AssemblyName>PinPadMockerCLI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,42 +33,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup />
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>$(SolutionDir)\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Crypto\ActiveCryptoHandler.cs" />
-    <Compile Include="Crypto\NoCryptoHandler.cs" />
-    <Compile Include="Crypto\PassiveCryptoHandler.cs" />
-    <Compile Include="Crypto\BaseCryptoHandler.cs" />
-    <Compile Include="Crypto\ICryptoHandler.cs" />
-    <Compile Include="Devices\DeviceBuffer.cs" />
-    <Compile Include="Devices\DeviceInputBuffer.cs" />
-    <Compile Include="Devices\DeviceOutputBuffer.cs" />
-    <Compile Include="Devices\DecryptedDevice.cs" />
-    <Compile Include="Devices\RegexSimulatedDevice.cs" />
-    <Compile Include="Devices\VirtualDevice.cs" />
-    <Compile Include="Emulator.cs" />
-    <Compile Include="Extensions\RandomExtensions.cs" />
-    <Compile Include="Interceptor.cs" />
+    <Compile Include="ArgReader.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PinPadEmulator\PinPadEmulator.csproj">
+      <Project>{59DDEAAA-7343-4707-8A94-A4A383D26234}</Project>
+      <Name>PinPadEmulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PinPadSDK\PinPadSDK.Windows\PinPadSDK.Windows.csproj">
+      <Project>{577ef28f-b897-4f07-8dc0-089e48d289dc}</Project>
+      <Name>PinPadSDK.Windows</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PinPadSDK\PinPadSDK\PinPadSDK.csproj">
-      <Project>{38CC2F4B-FE5D-4C2E-B168-01207033301A}</Project>
+      <Project>{38cc2f4b-fe5d-4c2e-b168-01207033301a}</Project>
       <Name>PinPadSDK</Name>
     </ProjectReference>
   </ItemGroup>

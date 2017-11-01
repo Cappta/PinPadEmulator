@@ -1,10 +1,11 @@
 ﻿using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
-using PinPadEmulator.Commands;
-using PinPadEmulator.Commands.Requests;
-using PinPadEmulator.Commands.Responses;
 using PinPadEmulator.Extensions;
+using PinPadSDK.Commands.Fields;
+using PinPadSDK.Commands.Requests;
+using PinPadSDK.Commands.Responses;
+using PinPadSDK.Extensions;
 using System;
 using System.Text;
 

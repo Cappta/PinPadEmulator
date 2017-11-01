@@ -1,4 +1,6 @@
 ﻿using PinPadEmulator.Crypto;
+using PinPadSDK;
+using PinPadSDK.Devices;
 using System;
 using System.Linq;
 

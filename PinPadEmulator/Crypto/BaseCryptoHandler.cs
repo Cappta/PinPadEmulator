@@ -1,6 +1,7 @@
-﻿using PinPadEmulator.Commands.Requests;
-using PinPadEmulator.Commands.Responses;
-using PinPadEmulator.Extensions;
+﻿using PinPadEmulator.Extensions;
+using PinPadSDK.Commands.Requests;
+using PinPadSDK.Commands.Responses;
+using PinPadSDK.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -166,7 +167,7 @@ namespace PinPadEmulator.Crypto
 
 		private string ExtractPanWithRegex(string input, Regex regex)
 		{
-			if (String.IsNullOrWhiteSpace(input) || regex.IsMatch(input) == false) { return null; }
+			if (string.IsNullOrWhiteSpace(input) || regex.IsMatch(input) == false) { return null; }
 
 			var match = regex.Match(input);
 

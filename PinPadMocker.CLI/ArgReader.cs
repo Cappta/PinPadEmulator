@@ -22,7 +22,7 @@ namespace PinPadMockerCLI
 		private Dictionary<Regex, string> LoadRegexPatterns(string[] args)
 		{
 			var regexPatterns = new Dictionary<Regex, string>();
-			for (var index = 0; index <= args.Length;)
+			for (var index = 0; index < args.Length;)
 			{
 				var currentArg = args[index++];
 				if (currentArg.StartsWith("-") == false) { continue; }
@@ -38,7 +38,7 @@ namespace PinPadMockerCLI
 		private string[] LoadWithIdentifier(string[] args, string identifier)
 		{
 			var values = new List<string>();
-			for (var index = 0; index <= args.Length;)
+			for (var index = 0; index < args.Length;)
 			{
 				var currentArg = args[index++];
 				if (currentArg.StartsWith(identifier) == false) { continue; }

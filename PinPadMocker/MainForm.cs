@@ -26,8 +26,8 @@ namespace PinPadMocker
 		public MainForm()
 		{
 			InitializeComponent();
-			this.LoadSettings();
-			this.FormClosed += this.SaveSettings;
+            //this.LoadSettings();
+            //this.FormClosed += this.SaveSettings;
 		}
 
 		private void LoadSettings()

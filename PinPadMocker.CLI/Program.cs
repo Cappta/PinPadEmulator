@@ -20,12 +20,12 @@ namespace PinPadMockerCLI
 			RecoverSerialPorts(argReader, out var primarySerialPort, out var secondarySerialPort);
 			if (string.IsNullOrWhiteSpace(secondarySerialPort))
 			{
-				ProcessInterceptor(primarySerialPort, secondarySerialPort);
+                ProcessSimulator(argReader, primarySerialPort);
 			}
 			else
 			{
-				ProcessSimulator(argReader, primarySerialPort);
-			}
+                ProcessInterceptor(primarySerialPort, secondarySerialPort);
+            }
 		}
 
 		static void RecoverSerialPorts(ArgReader argReader, out string primarySerialPort, out string secondarySerialPort)

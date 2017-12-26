@@ -41,18 +41,18 @@ namespace PinPadEmulator.Crypto
 			{
 				var decryptedPan = default(string);
 
-				var track1Pan = this.ExtractPanWithRegex(getCardResponse.Track1.Value, TRACK1_PAN_REGEX);
+				var track1Pan = getCardResponse.Track1.Value?.Pan.Value;
 				if (track1Pan != null)
 				{
 					decryptedPan = this.DecryptPan(track1Pan);
-					getCardResponse.Track1.Value = TRACK1_PAN_REGEX.Replace(getCardResponse.Track1.Value, $"B{decryptedPan}^");
+					getCardResponse.Track1.Value.Pan.Value = decryptedPan;
 				}
 
-				var track2Pan = this.ExtractPanWithRegex(getCardResponse.Track2.Value, TRACK2_PAN_REGEX);
+				var track2Pan = getCardResponse.Track2.Value?.Pan.Value;
 				if (track2Pan != null)
 				{
 					if (decryptedPan == null) { decryptedPan = this.DecryptPan(track2Pan); }
-					getCardResponse.Track2.Value = TRACK2_PAN_REGEX.Replace(getCardResponse.Track2.Value, $"{decryptedPan}=");
+					getCardResponse.Track2.Value.Pan.Value = decryptedPan;
 				}
 
 				if (getCardResponse.Pan.Value != null)
@@ -76,16 +76,16 @@ namespace PinPadEmulator.Crypto
 		{
 			if (command.TryConvertTo(out GetCardResponse getCardResponse))
 			{
-				var track1Pan = this.ExtractPanWithRegex(getCardResponse.Track1.Value, TRACK1_PAN_REGEX);
+				var track1Pan = getCardResponse.Track1.Value?.Pan.Value;
 				if (track1Pan != null)
 				{
-					getCardResponse.Track1.Value = TRACK1_PAN_REGEX.Replace(getCardResponse.Track1.Value, $"B{this.EncryptPan(track1Pan)}^");
+					getCardResponse.Track1.Value.Pan.Value = this.EncryptPan(track1Pan);
 				}
 
-				var track2Pan = this.ExtractPanWithRegex(getCardResponse.Track2.Value, TRACK2_PAN_REGEX);
+				var track2Pan = getCardResponse.Track2.Value?.Pan.Value;
 				if (track2Pan != null)
 				{
-					getCardResponse.Track2.Value = TRACK2_PAN_REGEX.Replace(getCardResponse.Track2.Value, $"{this.EncryptPan(track2Pan)}=");
+					getCardResponse.Track2.Value.Pan.Value = this.EncryptPan(track2Pan);
 				}
 
 				if (getCardResponse.Pan.Value != null)

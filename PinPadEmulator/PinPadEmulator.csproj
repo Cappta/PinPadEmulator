@@ -37,6 +37,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>$(SolutionDir)\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="PinPadSDK">
+      <HintPath>..\Lib\PinPadSDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,12 +67,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PinPadSDK\PinPadSDK\PinPadSDK.csproj">
-      <Project>{38CC2F4B-FE5D-4C2E-B168-01207033301A}</Project>
-      <Name>PinPadSDK</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -52,6 +52,9 @@
     <Reference Include="NSubstitute, Version=3.1.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
       <HintPath>..\packages\NSubstitute.3.1.0\lib\net46\NSubstitute.dll</HintPath>
     </Reference>
+    <Reference Include="PinPadSDK">
+      <HintPath>..\Lib\PinPadSDK.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -71,10 +74,6 @@
     <ProjectReference Include="..\PinPadEmulator\PinPadEmulator.csproj">
       <Project>{59ddeaaa-7343-4707-8a94-a4a383d26234}</Project>
       <Name>PinPadEmulator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PinPadSDK\PinPadSDK\PinPadSDK.csproj">
-      <Project>{38cc2f4b-fe5d-4c2e-b168-01207033301a}</Project>
-      <Name>PinPadSDK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

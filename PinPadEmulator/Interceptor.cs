@@ -2,6 +2,7 @@
 using PinPadSDK.Devices;
 using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace PinPadEmulator
 {
@@ -36,33 +37,27 @@ namespace PinPadEmulator
 
 		private void OnVirtualLinkCommandReceived(string command)
 		{
-			Debug.WriteLine($"OnVirtualLinkCommandReceived: {command}");
 			this.Request?.Invoke(command);
 		}
 
 		private void OnRealLinkCommandReceived(string command)
 		{
-			Debug.WriteLine($"OnRealLinkCommandReceived: {command}");
 			this.Response?.Invoke(command);
 		}
 
 		private void OnVirtualDeviceOutput(byte[] dataCollection)
 		{
-			//Debug.WriteLine($"OnVirtualDeviceOutput: {dataCollection.ToHexString()}");
-			//foreach (var data in dataCollection)
-			//{
+			Debug.WriteLine($"OnVirtualDeviceOutput: {Encoding.ASCII.GetString(dataCollection)} | {BitConverter.ToString(dataCollection)}");
+			
 			this.virtualLink.Input(dataCollection);
-			//}
 			this.realDevice.Input(dataCollection);
 		}
 
 		private void OnRealDeviceOutput(byte[] dataCollection)
 		{
-			//Debug.WriteLine($"OnRealDeviceOutput: {dataCollection.ToHexString()}");
-			//foreach (var data in dataCollection)
-			//{
+			Debug.WriteLine($"OnRealDeviceOutput: {Encoding.ASCII.GetString(dataCollection)} | {BitConverter.ToString(dataCollection)}");
+			
 			this.realLink.Input(dataCollection);
-			//}
 			this.virtualDevice.Input(dataCollection);
 		}
 

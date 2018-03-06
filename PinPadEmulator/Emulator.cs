@@ -1,9 +1,11 @@
-﻿using PinPadEmulator.Commands.Requests;
-using PinPadEmulator.Commands.Responses;
-using PinPadEmulator.Crypto;
-using PinPadEmulator.Devices;
+﻿using PinPadEmulator.Crypto;
+using PinPadSDK;
+using PinPadSDK.Commands.Requests;
+using PinPadSDK.Commands.Responses;
+using PinPadSDK.Devices;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,7 +19,7 @@ namespace PinPadEmulator
 		public event Action AbortRequested;
 
 		private readonly DataLink dataLink;
-		private readonly Deserializer deserializer;
+		private readonly Deserializer<BaseRequest> deserializer;
 		private readonly IDevice device;
 		private readonly ICryptoHandler cryptoHandler;
 
@@ -34,7 +36,7 @@ namespace PinPadEmulator
 			this.device.Output += this.OnDeviceOutput;
 
 			this.dataLink = new DataLink();
-			this.deserializer = new Deserializer();
+			this.deserializer = new Deserializer<BaseRequest>();
 
 			this.dataLink.CommandReceived += this.OnCommandReceived;
 			this.dataLink.CorruptCommandReceived += this.OnCorruptCommandReceived;
@@ -44,6 +46,8 @@ namespace PinPadEmulator
 		private void OnCommandReceived(string command)
 		{
 			this.DeviceInput(ByteFlag.PACKET_ACKNOWLEDGE);
+
+			Debug.WriteLine($"REQUEST: {command}");
 
 			var cryptoHandled = this.cryptoHandler.Handle(command);
 			if (cryptoHandled != null)
@@ -108,7 +112,10 @@ namespace PinPadEmulator
 			this.responseCounter++;
 
 			var command = response.ToString();
-			this.DeviceInput(Checksum.Encapsulate(this.cryptoHandler.Redo(command)).ToArray());
+			var redone = this.cryptoHandler.Redo(command);
+			Debug.WriteLine($"RESPONSE: {command} : {redone}");
+
+			this.DeviceInput(Checksum.Encapsulate(redone).ToArray());
 		}
 
 		private void OnDeviceOutput(byte[] data)

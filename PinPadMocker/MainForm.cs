@@ -3,6 +3,8 @@ using PinPadEmulator.Crypto;
 using PinPadEmulator.Devices;
 using PinPadEmulator.Extensions;
 using PinPadMocker.Properties;
+using PinPadSDK.Extensions;
+using PinPadSDK.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,8 +26,8 @@ namespace PinPadMocker
 		public MainForm()
 		{
 			InitializeComponent();
-			this.LoadSettings();
-			this.FormClosed += this.SaveSettings;
+            //this.LoadSettings();
+            //this.FormClosed += this.SaveSettings;
 		}
 
 		private void LoadSettings()
@@ -230,6 +232,7 @@ namespace PinPadMocker
 					file.WriteLine(request);
 					file.WriteLine(response);
 				}
+				this.AppendLog($"Saved {dialog.FileName}");
 			}
 		}
 
@@ -255,12 +258,14 @@ namespace PinPadMocker
 
 					this.requestResponseDictionary[request] = response;
 				}
+				this.AppendLog($"Loaded {dialog.FileName}");
 			}
 		}
 
 		private void UxButtonReset_Click(object sender, EventArgs e)
 		{
 			this.requestResponseDictionary.Clear();
+			this.UxTextLog.Text = "";
 		}
 	}
 }

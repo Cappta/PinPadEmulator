@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,64 +42,34 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ByteFlag.cs" />
-    <Compile Include="Checksum.cs" />
-    <Compile Include="Commands\CryptoMethod.cs" />
-    <Compile Include="Commands\DecryptedRsaCryptogram.cs" />
-    <Compile Include="Commands\GetPinEntry.cs" />
-    <Compile Include="Commands\Requests\DefineRsaWorkingKeyRequest.cs" />
-    <Compile Include="Commands\Requests\GetPinRequest.cs" />
-    <Compile Include="Commands\Responses\DefineRsaWorkingKeyResponse.cs" />
     <Compile Include="Crypto\ActiveCryptoHandler.cs" />
+    <Compile Include="Crypto\NoCryptoHandler.cs" />
     <Compile Include="Crypto\PassiveCryptoHandler.cs" />
     <Compile Include="Crypto\BaseCryptoHandler.cs" />
     <Compile Include="Crypto\ICryptoHandler.cs" />
-    <Compile Include="Deserializer.cs" />
-    <Compile Include="DataLink.cs" />
-    <Compile Include="Commands\BaseCommand.cs" />
-    <Compile Include="Commands\CardType.cs" />
-    <Compile Include="Commands\ChipStatus.cs" />
     <Compile Include="Devices\DeviceBuffer.cs" />
     <Compile Include="Devices\DeviceInputBuffer.cs" />
     <Compile Include="Devices\DeviceOutputBuffer.cs" />
     <Compile Include="Devices\DecryptedDevice.cs" />
-    <Compile Include="Devices\IDevice.cs" />
     <Compile Include="Devices\RegexSimulatedDevice.cs" />
-    <Compile Include="Devices\SerialDevice.cs" />
     <Compile Include="Devices\VirtualDevice.cs" />
     <Compile Include="Emulator.cs" />
-    <Compile Include="Extensions\ByteArrayExtension.cs" />
-    <Compile Include="Extensions\GenericExtensions.cs" />
-    <Compile Include="Extensions\IntExtensions.cs" />
-    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
-    <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Fields\CommandBlock.cs" />
-    <Compile Include="Fields\OptionalDateTimeField.cs" />
-    <Compile Include="Fields\DateTimeField.cs" />
-    <Compile Include="Fields\Field.cs" />
-    <Compile Include="Fields\FieldGroup.cs" />
-    <Compile Include="Fields\FieldList.cs" />
-    <Compile Include="Fields\FixedLengthField.cs" />
-    <Compile Include="Fields\FixedValueField.cs" />
-    <Compile Include="Fields\IField.cs" />
-    <Compile Include="Fields\PaddedVariableLengthField.cs" />
-    <Compile Include="Fields\VariableLengthField.cs" />
     <Compile Include="Interceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Commands\AidEntryReference.cs" />
-    <Compile Include="Commands\Requests\BaseRequest.cs" />
-    <Compile Include="Commands\Requests\GetCardRequest.cs" />
-    <Compile Include="Commands\Requests\OpenRequest.cs" />
-    <Compile Include="Commands\Responses\BaseResponse.cs" />
-    <Compile Include="Commands\Responses\GetCardResponse.cs" />
-    <Compile Include="Commands\Responses\OpenResponse.cs" />
-    <Compile Include="Utils\StringReader.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PinPadSDK\PinPadSDK\PinPadSDK.csproj">
+      <Project>{38CC2F4B-FE5D-4C2E-B168-01207033301A}</Project>
+      <Name>PinPadSDK</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

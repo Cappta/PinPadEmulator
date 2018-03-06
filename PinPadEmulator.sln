@@ -5,11 +5,25 @@ VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulator", "PinPadEmulator\PinPadEmulator.csproj", "{59DDEAAA-7343-4707-8A94-A4A383D26234}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulatorTests", "PinPadEmulatorTests\PinPadEmulatorTests.csproj", "{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadMocker", "PinPadMocker\PinPadMocker.csproj", "{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadMockerCLI", "PinPadMockerCLI\PinPadMockerCLI.csproj", "{F8F858C1-0CE8-44C8-92AE-A73A81732A19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadMocker.CLI", "PinPadMocker.CLI\PinPadMocker.CLI.csproj", "{F8F858C1-0CE8-44C8-92AE-A73A81732A19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadSDK", "PinPadSDK\PinPadSDK\PinPadSDK.csproj", "{38CC2F4B-FE5D-4C2E-B168-01207033301A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadSDK.Windows", "PinPadSDK\PinPadSDK.Windows\PinPadSDK.Windows.csproj", "{577EF28F-B897-4F07-8DC0-089E48D289DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A6820F96-A1A3-4F9D-BED9-AAB57E56FA7F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulator.Tests", "PinPadEmulator.Tests\PinPadEmulator.Tests.csproj", "{2F4F96AF-5E03-45F5-AA6B-DBF7D2B0CDBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadSDK.Tests", "PinPadSDK\PinPadSDK.Tests\PinPadSDK.Tests.csproj", "{27B13D84-DD3E-4E22-A805-29DEDC95E021}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +35,6 @@ Global
 		{59DDEAAA-7343-4707-8A94-A4A383D26234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59DDEAAA-7343-4707-8A94-A4A383D26234}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59DDEAAA-7343-4707-8A94-A4A383D26234}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FB12D7E-4C3D-4FD0-9C2F-99238F428834}.Release|Any CPU.Build.0 = Release|Any CPU
 		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97DEF0C3-56FD-4079-8ACF-0D5FADE5515D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +43,22 @@ Global
 		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8F858C1-0CE8-44C8-92AE-A73A81732A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38CC2F4B-FE5D-4C2E-B168-01207033301A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38CC2F4B-FE5D-4C2E-B168-01207033301A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38CC2F4B-FE5D-4C2E-B168-01207033301A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38CC2F4B-FE5D-4C2E-B168-01207033301A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{577EF28F-B897-4F07-8DC0-089E48D289DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577EF28F-B897-4F07-8DC0-089E48D289DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577EF28F-B897-4F07-8DC0-089E48D289DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577EF28F-B897-4F07-8DC0-089E48D289DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F4F96AF-5E03-45F5-AA6B-DBF7D2B0CDBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F4F96AF-5E03-45F5-AA6B-DBF7D2B0CDBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F4F96AF-5E03-45F5-AA6B-DBF7D2B0CDBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F4F96AF-5E03-45F5-AA6B-DBF7D2B0CDBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27B13D84-DD3E-4E22-A805-29DEDC95E021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27B13D84-DD3E-4E22-A805-29DEDC95E021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27B13D84-DD3E-4E22-A805-29DEDC95E021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27B13D84-DD3E-4E22-A805-29DEDC95E021}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

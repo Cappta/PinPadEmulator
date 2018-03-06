@@ -1,10 +1,11 @@
 ﻿using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Math;
-using PinPadEmulator.Commands;
-using PinPadEmulator.Commands.Requests;
-using PinPadEmulator.Commands.Responses;
 using PinPadEmulator.Extensions;
+using PinPadSDK.Commands.Fields;
+using PinPadSDK.Commands.Requests;
+using PinPadSDK.Commands.Responses;
+using PinPadSDK.Extensions;
 using System;
 using System.Text;
 
@@ -12,18 +13,29 @@ namespace PinPadEmulator.Crypto
 {
 	public class ActiveCryptoHandler : BaseCryptoHandler
 	{
-		private static readonly Random random = new Random();
+		public ActiveCryptoHandler()
+		{
+		}
+
+		public ActiveCryptoHandler(byte[] workingKey)
+		{
+			this.WorkingKey = workingKey;
+		}
 
 		public override BaseResponse Handle(string command)
 		{
 			if (command.TryConvertTo(out DefineRsaWorkingKeyRequest dwkRequest) == false) { return null; }
 
 			var decryptedRsaCryptogram = new DecryptedRsaCryptogram();
-			decryptedRsaCryptogram.SequentialNumber.Value = random.Next(0, 999999999);
+			decryptedRsaCryptogram.SequentialNumber.Value = 1;
 
-			this.WorkingKey = random.ByteArray(16);
+			if (this.WorkingKey == null)
+			{
+				var random = new Random();
+				this.WorkingKey = random.ByteArray(16);
+			}
 			decryptedRsaCryptogram.WorkingKey.Value = this.WorkingKey;
-			 
+
 			var rsaEngine = new RsaEngine();
 			rsaEngine.Init(true,
 				new RsaKeyParameters(false, new BigInteger(1, dwkRequest.Modulus.Value), new BigInteger(1, dwkRequest.Exponent.Value))

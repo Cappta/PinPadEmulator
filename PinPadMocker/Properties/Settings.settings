@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PinPadMocker.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="VirtualSerialPort" Type="System.String" Scope="User">
+    <Setting Name="VirtualSerialPort" Type="System.string" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="RealSerialPort" Type="System.String" Scope="User">
+    <Setting Name="RealSerialPort" Type="System.string" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Mode" Type="System.Int32" Scope="User">

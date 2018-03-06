@@ -1,7 +1,8 @@
 ﻿using PinPadEmulator;
 using PinPadEmulator.Crypto;
 using PinPadEmulator.Devices;
-using PinPadEmulator.Extensions;
+using PinPadSDK.Extensions;
+using PinPadSDK.Windows;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -19,12 +20,12 @@ namespace PinPadMockerCLI
 			RecoverSerialPorts(argReader, out var primarySerialPort, out var secondarySerialPort);
 			if (string.IsNullOrWhiteSpace(secondarySerialPort))
 			{
-				ProcessInterceptor(primarySerialPort, secondarySerialPort);
+                ProcessSimulator(argReader, primarySerialPort);
 			}
 			else
 			{
-				ProcessSimulator(argReader, primarySerialPort);
-			}
+                ProcessInterceptor(primarySerialPort, secondarySerialPort);
+            }
 		}
 
 		static void RecoverSerialPorts(ArgReader argReader, out string primarySerialPort, out string secondarySerialPort)
@@ -40,7 +41,7 @@ namespace PinPadMockerCLI
 					return;
 				case 1:
 					primarySerialPort = argReader.SerialPorts[0];
-					secondarySerialPort = String.Empty;
+					secondarySerialPort = string.Empty;
 					return;
 				default:
 					primarySerialPort = argReader.SerialPorts[0];
@@ -85,7 +86,7 @@ namespace PinPadMockerCLI
 
 		static Dictionary<Regex, string> RecoverRegexPatterns(ArgReader argReader)
 		{
-			if(argReader.RegexPatterns.Count > 0) { return argReader.RegexPatterns; }
+			if (argReader.RegexPatterns.Count > 0) { return argReader.RegexPatterns; }
 
 			var regexPatterns = new Dictionary<Regex, string>();
 			while (true)
@@ -93,7 +94,7 @@ namespace PinPadMockerCLI
 				Console.WriteLine("Input the regex or blank to stop");
 				var regexString = Console.ReadLine();
 
-				if(string.IsNullOrWhiteSpace(regexString)) { return regexPatterns; }
+				if (string.IsNullOrWhiteSpace(regexString)) { return regexPatterns; }
 
 				var regex = new Regex(regexString);
 				var pattern = Console.ReadLine();

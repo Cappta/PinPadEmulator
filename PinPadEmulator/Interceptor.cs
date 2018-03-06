@@ -1,5 +1,5 @@
-﻿using PinPadEmulator.Devices;
-using PinPadEmulator.Extensions;
+﻿using PinPadSDK;
+using PinPadSDK.Devices;
 using System;
 using System.Diagnostics;
 
@@ -21,17 +21,17 @@ namespace PinPadEmulator
 			if (virtualDevice == null) { throw new ArgumentNullException(nameof(virtualDevice)); }
 			if (realDevice == null) { throw new ArgumentNullException(nameof(realDevice)); }
 
-			this.virtualLink = new DataLink();
-			this.virtualLink.CommandReceived += this.OnVirtualLinkCommandReceived;
-
-			this.realLink = new DataLink();
-			this.realLink.CommandReceived += this.OnRealLinkCommandReceived;
-
 			this.virtualDevice = virtualDevice;
 			this.virtualDevice.Output += this.OnVirtualDeviceOutput;
 
+			this.virtualLink = new DataLink();
+			this.virtualLink.CommandReceived += this.OnVirtualLinkCommandReceived;
+
 			this.realDevice = realDevice;
 			this.realDevice.Output += this.OnRealDeviceOutput;
+
+			this.realLink = new DataLink();
+			this.realLink.CommandReceived += this.OnRealLinkCommandReceived;
 		}
 
 		private void OnVirtualLinkCommandReceived(string command)
@@ -48,21 +48,21 @@ namespace PinPadEmulator
 
 		private void OnVirtualDeviceOutput(byte[] dataCollection)
 		{
-			Debug.WriteLine($"OnVirtualDeviceOutput: {dataCollection.ToHexString()}");
-			foreach (var data in dataCollection)
-			{
-				this.virtualLink.Input(data);
-			}
+			//Debug.WriteLine($"OnVirtualDeviceOutput: {dataCollection.ToHexString()}");
+			//foreach (var data in dataCollection)
+			//{
+			this.virtualLink.Input(dataCollection);
+			//}
 			this.realDevice.Input(dataCollection);
 		}
 
 		private void OnRealDeviceOutput(byte[] dataCollection)
 		{
-			Debug.WriteLine($"OnRealDeviceOutput: {dataCollection.ToHexString()}");
-			foreach (var data in dataCollection)
-			{
-				this.realLink.Input(data);
-			}
+			//Debug.WriteLine($"OnRealDeviceOutput: {dataCollection.ToHexString()}");
+			//foreach (var data in dataCollection)
+			//{
+			this.realLink.Input(dataCollection);
+			//}
 			this.virtualDevice.Input(dataCollection);
 		}
 

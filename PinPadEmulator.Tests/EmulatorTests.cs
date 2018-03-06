@@ -1,13 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using PinPadEmulator;
-using PinPadEmulator.Commands.Requests;
 using PinPadEmulator.Crypto;
-using PinPadEmulator.Devices;
+using PinPadSDK.Commands.Requests;
+using PinPadSDK.Devices;
 using System;
 using System.Text;
 
-namespace PinPadEmulatorTests
+namespace PinPadEmulator.Tests
 {
 	[TestClass]
 	public class EmulatorTests

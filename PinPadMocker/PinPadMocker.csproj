@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -87,6 +90,14 @@
     <ProjectReference Include="..\PinPadEmulator\PinPadEmulator.csproj">
       <Project>{59ddeaaa-7343-4707-8a94-a4a383d26234}</Project>
       <Name>PinPadEmulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PinPadSDK\PinPadSDK.Windows\PinPadSDK.Windows.csproj">
+      <Project>{577ef28f-b897-4f07-8dc0-089e48d289dc}</Project>
+      <Name>PinPadSDK.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PinPadSDK\PinPadSDK\PinPadSDK.csproj">
+      <Project>{38cc2f4b-fe5d-4c2e-b168-01207033301a}</Project>
+      <Name>PinPadSDK</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

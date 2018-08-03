@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadEmulator.Tests", "Pin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinPadSDK.Tests", "PinPadSDK\PinPadSDK.Tests\PinPadSDK.Tests.csproj", "{27B13D84-DD3E-4E22-A805-29DEDC95E021}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PinpadVirtual.Presentation", "PinpadVirtual.Presentation\PinpadVirtual.Presentation.csproj", "{20D76B7E-0BC5-41AF-96B9-372AE6D99191}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,8 +61,15 @@ Global
 		{27B13D84-DD3E-4E22-A805-29DEDC95E021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27B13D84-DD3E-4E22-A805-29DEDC95E021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27B13D84-DD3E-4E22-A805-29DEDC95E021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20D76B7E-0BC5-41AF-96B9-372AE6D99191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D76B7E-0BC5-41AF-96B9-372AE6D99191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D76B7E-0BC5-41AF-96B9-372AE6D99191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D76B7E-0BC5-41AF-96B9-372AE6D99191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EFA7B2E-0E0F-43E6-8BCC-326731F857AE}
 	EndGlobalSection
 EndGlobal

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PinpadVirtual.Presentation.Properties
+namespace PinPadVirtual.Properties
 {
 
 

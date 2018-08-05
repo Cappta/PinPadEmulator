@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{20D76B7E-0BC5-41AF-96B9-372AE6D99191}</ProjectGuid>
+    <ProjectGuid>{CB2FC7CC-935D-4753-847C-13B1BD768A6A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PinpadVirtual.Presentation</RootNamespace>
-    <AssemblyName>PinpadVirtual.Presentation</AssemblyName>
+    <RootNamespace>PinPadVirtual</RootNamespace>
+    <AssemblyName>PinPadVirtual</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -60,8 +60,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PinpadVirtual.xaml.cs">
-      <DependentUpon>PinpadVirtual.xaml</DependentUpon>
+    <Compile Include="Infra\ArgReader.cs" />
+    <Compile Include="Infra\EmulatorHandler.cs" />
+    <Compile Include="Infra\ScriptHandler.cs" />
+    <Compile Include="PinPad.xaml.cs">
+      <DependentUpon>PinPad.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -89,10 +92,43 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="PinpadVirtual.xaml">
+    <Page Include="PinPad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imgs\Green.png" />
+    <Resource Include="imgs\GreenBright.png" />
+    <Resource Include="imgs\pinpad.png" />
+    <Resource Include="imgs\Red Bright.png" />
+    <Resource Include="imgs\Red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PinPadEmulator\PinPadEmulator.csproj">
+      <Project>{59DDEAAA-7343-4707-8A94-A4A383D26234}</Project>
+      <Name>PinPadEmulator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PinPadSDK\PinPadSDK.Windows\PinPadSDK.Windows.csproj">
+      <Project>{577ef28f-b897-4f07-8dc0-089e48d289dc}</Project>
+      <Name>PinPadSDK.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PinPadSDK\PinPadSDK\PinPadSDK.csproj">
+      <Project>{38cc2f4b-fe5d-4c2e-b168-01207033301a}</Project>
+      <Name>PinPadSDK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Scripts\Digitado.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Scripts\Master-BotaoVermelho.txt" />
+    <Resource Include="Scripts\Master-Padrao.txt" />
+    <Resource Include="Scripts\Visa-BotaoVermelho.txt" />
+    <Resource Include="Scripts\Visa-Padrao.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

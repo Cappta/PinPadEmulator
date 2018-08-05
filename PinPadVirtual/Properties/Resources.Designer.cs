@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PinpadVirtual.Presentation.Properties
+namespace PinPadVirtual.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace PinpadVirtual.Presentation.Properties
 			{
 				if ((resourceMan == null))
 				{
-					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PinpadVirtual.Presentation.Properties.Resources", typeof(Resources).Assembly);
+					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PinPadVirtual.Properties.Resources", typeof(Resources).Assembly);
 					resourceMan = temp;
 				}
 				return resourceMan;

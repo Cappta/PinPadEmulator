@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="PinPad" Height="600" Width="303"
 		WindowStyle="None" AllowsTransparency="True"
+		Background="Transparent"
+		MouseLeftButtonDown="Window_MouseLeftButtonDown"
+		Loaded="Window_Loaded"
 		>
 	<Canvas Background="Transparent">
 		<Image Height="600" Width="303" Source="imgs/pinpad.png" Canvas.Left="0" Canvas.Top="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-		<Button Content="Button" Canvas.Left="109" Canvas.Top="224" Width="76" Height="38" Click="Button_Click"/>
 		<Grid Height="140" Canvas.Left="28" Canvas.Top="62" Width="231" Background="Blue">
-			<TextBlock Name="PinpadDisplay" Foreground="White" Margin="5,35"></TextBlock>
+			<TextBlock  x:Name="PinpadDisplay" Foreground="White" Margin="5,35"></TextBlock>
 		</Grid>
 	</Canvas>
 </Window>

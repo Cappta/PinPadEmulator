@@ -12,6 +12,8 @@ namespace PinPadVirtual.Infra
 {
 	public class EmulatorHandler
 	{
+		public static event Action<string> AppendLog;
+
 		public static void ProcessSimulator(ArgReader argReader, string primarySerialPort)
 		{
 			var regexPatterns = RecoverRegexPatterns(argReader);
@@ -30,9 +32,7 @@ namespace PinPadVirtual.Infra
 			var interceptor = new Interceptor(virtualDevice, simulatedDevice);
 			interceptor.Request += OnRequest;
 			interceptor.Response += OnResponse;
-
-			AppendLog("Started");
-
+			
 			Thread.Sleep(Timeout.Infinite);
 		}
 
@@ -56,41 +56,32 @@ namespace PinPadVirtual.Infra
 
 		public static void OnWorkingKeyDefined(byte[] workingKey)
 		{
-			AppendLog($"WorkingKey definida para \"{workingKey.ToHexString()}\"");
+			AppendLog.Invoke($"WorkingKey definida para \"{workingKey.ToHexString()}\"");
 		}
 
 		public static void OnRequest(string request)
 		{
-			AppendLog($"Recebido \"{request}\"");
+			AppendLog.Invoke($"Recebido \"{request}\"");
 		}
 
 		public static void OnRegexApplied(Regex regex, string pattern, string result)
 		{
-			AppendLog($"Regex \"{regex}\" com padrão \"{pattern}\" gerou \"{result}\"");
+			AppendLog.Invoke($"Regex \"{regex}\" com padrão \"{pattern}\" gerou \"{result}\"");
 		}
 
 		public static void OnResponse(string response)
 		{
-			AppendLog($"Respondido \"{response}\"");
+			AppendLog.Invoke($"Respondido \"{response}\"");
 		}
 
 		public static void OnCorruptCommand(string invalidRequest)
 		{
-			AppendLog($"Checksum invalido para: \"{invalidRequest}\"");
+			AppendLog.Invoke($"Checksum invalido para: \"{invalidRequest}\"");
 		}
 
 		public static void OnAbort()
 		{
-			AppendLog($"Tentativa de abortar comando anterior");
+			AppendLog.Invoke($"Tentativa de abortar comando anterior");
 		}
-
-		public static void AppendLog(string message)
-		{
-			var logTime = DateTime.Now.ToLongTimeString();
-			var logMessage = $"{logTime} : {message}{Environment.NewLine}";
-
-			PinPad.ListenMessage(logMessage);
-		}
-
 	}
 }

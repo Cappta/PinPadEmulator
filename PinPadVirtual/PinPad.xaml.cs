@@ -125,10 +125,10 @@ namespace PinPadVirtual
 
 		private void BackProcess()
 		{
-			if (this.MenuIndex == 2)
+			if (this.MenuIndex == 1)
 			{
 				this.ActualSerialPort = null;
-				this.FillScriptDisplay();
+				this.FillSerialPortDisplay();
 			}
 			this.MenuIndex--;
 		}

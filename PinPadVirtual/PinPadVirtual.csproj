@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Infra\ArgReader.cs" />
     <Compile Include="Infra\EmulatorHandler.cs" />
+    <Compile Include="Infra\ScriptFile.cs" />
     <Compile Include="Infra\ScriptHandler.cs" />
     <Compile Include="PinPad.xaml.cs">
       <DependentUpon>PinPad.xaml</DependentUpon>
@@ -131,7 +132,6 @@
       <Name>PinPadSDK</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Scripts\Digitado.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -148,6 +148,10 @@
     <EmbeddedResource Include="Scripts\Visa-Padrao.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="imgs\leftArrow.png" />
+    <Resource Include="imgs\rightArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

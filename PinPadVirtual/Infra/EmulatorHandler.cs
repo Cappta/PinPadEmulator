@@ -16,7 +16,7 @@ namespace PinPadVirtual.Infra
 
 		public static void ProcessSimulator(ArgReader argReader, string primarySerialPort)
 		{
-			var regexPatterns = RecoverRegexPatterns(argReader);
+			var regexPatterns = argReader.RegexPatterns;
 
 			var cryptoHandler = new ActiveCryptoHandler();
 			cryptoHandler.WorkingKeyDefined += OnWorkingKeyDefined;
@@ -32,26 +32,8 @@ namespace PinPadVirtual.Infra
 			var interceptor = new Interceptor(virtualDevice, simulatedDevice);
 			interceptor.Request += OnRequest;
 			interceptor.Response += OnResponse;
-			
+
 			Thread.Sleep(Timeout.Infinite);
-		}
-
-		public static Dictionary<Regex, string> RecoverRegexPatterns(ArgReader argReader)
-		{
-			if (argReader.RegexPatterns.Count > 0) { return argReader.RegexPatterns; }
-
-			var regexPatterns = new Dictionary<Regex, string>();
-			while (true)
-			{
-				Console.WriteLine("Input the regex or blank to stop");
-				var regexString = Console.ReadLine();
-
-				if (string.IsNullOrWhiteSpace(regexString)) { return regexPatterns; }
-
-				var regex = new Regex(regexString);
-				var pattern = Console.ReadLine();
-				regexPatterns[regex] = pattern;
-			}
 		}
 
 		public static void OnWorkingKeyDefined(byte[] workingKey)

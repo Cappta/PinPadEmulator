@@ -9,8 +9,21 @@
 		WindowStyle="None" AllowsTransparency="True"
 		Background="Transparent"
 		MouseLeftButtonDown="Window_MouseLeftButtonDown"
-		Loaded="Window_Loaded"
 		>
+	<Window.Resources>
+		<Style x:Key="TextStyle" TargetType="TextBlock">
+			<Setter Property="FontSize" Value="32"/>
+			<Setter Property="Foreground" Value="#525252"/>
+			<Setter Property="FontFamily" Value="Courier New"/>
+		</Style>
+		<Style x:Key="ListStyle" TargetType="ListView">
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Foreground" Value="#525252"/>
+			<Setter Property="FontFamily" Value="Courier New"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+		</Style>
+	</Window.Resources>
+
 	<Canvas Background="Transparent">
 		<Image Height="600" Width="303" Source="imgs/pinpad.png" Canvas.Left="0" Canvas.Top="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 		<Grid Height="141" Canvas.Left="28" Canvas.Top="61" Width="231">
@@ -20,7 +33,18 @@
 					<GradientStop Color="#a39a71"/>
 				</RadialGradientBrush>
 			</Grid.Background>
-			<TextBlock  x:Name="PinpadDisplay" Foreground="White" Margin="5,35"></TextBlock>
+			<Grid Margin="0,0,0,20">
+				<ListView Name="ListsDisplay" Style="{StaticResource ListStyle}" Background="Transparent"/>
+				<TextBlock  x:Name="PinpadTextDisplay" Style="{StaticResource TextStyle}" TextAlignment="Center" Margin="5,35" Visibility="Hidden" ></TextBlock>
+			</Grid>
+			<Canvas Margin="0,119,0,0">
+				<Image Name="LeftArrow" Height="18" Source="imgs/leftArrow.png" Canvas.Top="4" Canvas.Left="6" Width="20" Visibility="Hidden" MouseDown="LeftArrow_MouseDown"/>
+				<Image Name="RightArrow" Height="18" Source="imgs/rightArrow.png" Canvas.Top="4" Canvas.Left="204" Width="20" MouseDown="RightArrow_MouseDown"/>
+			</Canvas>
 		</Grid>
+		<Button x:Name="DisplayDown" Content="Button" Canvas.Left="57" Canvas.Top="283" Width="75"/>
+		<Button x:Name="DisplayUp" Content="Button" Canvas.Left="160" Canvas.Top="278" Width="74"/>
+		<Button x:Name="GreenButton" Content="Button" Canvas.Left="160" Canvas.Top="449" Width="74"/>
+		<Button x:Name="RedButton" Content="Button" Canvas.Left="42" Canvas.Top="454" Width="74"/>
 	</Canvas>
 </Window>

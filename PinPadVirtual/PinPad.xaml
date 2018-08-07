@@ -13,7 +13,13 @@
 		>
 	<Canvas Background="Transparent">
 		<Image Height="600" Width="303" Source="imgs/pinpad.png" Canvas.Left="0" Canvas.Top="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-		<Grid Height="140" Canvas.Left="28" Canvas.Top="62" Width="231" Background="Blue">
+		<Grid Height="141" Canvas.Left="28" Canvas.Top="61" Width="231">
+			<Grid.Background>
+				<RadialGradientBrush>
+					<GradientStop Color="#9c9372" Offset="1"/>
+					<GradientStop Color="#a39a71"/>
+				</RadialGradientBrush>
+			</Grid.Background>
 			<TextBlock  x:Name="PinpadDisplay" Foreground="White" Margin="5,35"></TextBlock>
 		</Grid>
 	</Canvas>

@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace PinPadVirtual
 {
@@ -13,7 +14,7 @@ namespace PinPadVirtual
 	/// Lógica interna para PinPad.xaml
 	/// </summary>
 	public partial class PinPad : Window
-	{		
+	{
 		private Thread emulatorThread;
 		private List<ScriptFile> scriptFiles;
 
@@ -125,10 +126,17 @@ namespace PinPadVirtual
 
 		private void BackProcess()
 		{
-			if (this.MenuIndex == 1)
+			switch (this.MenuIndex)
 			{
-				this.ActualSerialPort = null;
-				this.FillSerialPortDisplay();
+				case 1:
+					this.ActualSerialPort = null;
+					this.FillSerialPortDisplay();
+					this.LeftDisplayButton.Visibility = Visibility.Hidden;
+					break;
+				case 2:
+					break;
+				default:
+					break;
 			}
 			this.MenuIndex--;
 		}
@@ -141,7 +149,7 @@ namespace PinPadVirtual
 				MessageBox.Show("Por favor, selecione um item da lista antes de continuar!");
 				return;
 			}
-		
+
 			this.ContinueProcess();
 		}
 
@@ -153,9 +161,16 @@ namespace PinPadVirtual
 				case 1:
 					this.ActualSerialPort = this.ListsDisplay.SelectedItem.ToString();
 					this.FillScriptDisplay();
-					this.LeftArrow.Visibility = Visibility.Visible;
+					this.LeftDisplayButton.Visibility = Visibility.Visible;
 					break;
 				case 2:
+
+					//Mudar Setas
+
+					this.PinpadTextDisplay.Text = "Pronto para transacionar!";
+					//this.LeftDisplayButton.Source = new BitmapImage(new Uri(@"/imgs/stop.png", UriKind.Relative));
+					//this.RightDisplayButton.Source = new BitmapImage(new Uri(@"/imgs/check.png", UriKind.Relative));
+
 					this.ListsDisplay.Visibility = Visibility.Hidden;
 					this.PinpadTextDisplay.Visibility = Visibility.Visible;
 					this.ActualScript = this.scriptFiles[this.ListsDisplay.SelectedIndex];

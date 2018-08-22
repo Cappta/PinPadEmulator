@@ -12,7 +12,7 @@
 		>
 	<Window.Resources>
 		<Style x:Key="TextStyle" TargetType="TextBlock">
-			<Setter Property="FontSize" Value="32"/>
+			<Setter Property="FontSize" Value="24"/>
 			<Setter Property="Foreground" Value="#525252"/>
 			<Setter Property="FontFamily" Value="Courier New"/>
 		</Style>
@@ -38,8 +38,8 @@
 				<TextBlock  x:Name="PinpadTextDisplay" Style="{StaticResource TextStyle}" TextAlignment="Center" Margin="5,35" Visibility="Hidden" ></TextBlock>
 			</Grid>
 			<Canvas Margin="0,119,0,0">
-				<Image Name="LeftArrow" Height="18" Source="imgs/leftArrow.png" Canvas.Top="4" Canvas.Left="6" Width="20" Visibility="Hidden" MouseDown="LeftArrow_MouseDown"/>
-				<Image Name="RightArrow" Height="18" Source="imgs/rightArrow.png" Canvas.Top="4" Canvas.Left="204" Width="20" MouseDown="RightArrow_MouseDown"/>
+				<Image Name="LeftDisplayButton" Height="18" Source="imgs/leftArrow.png" Canvas.Top="4" Canvas.Left="6" Width="20" Visibility="Hidden" MouseDown="LeftArrow_MouseDown"/>
+				<Image Name="RightDisplayButton" Height="18" Source="imgs/rightArrow.png" Canvas.Top="4" Canvas.Left="204" Width="20" MouseDown="RightArrow_MouseDown"/>
 			</Canvas>
 		</Grid>
 		<Button x:Name="DisplayDown" Content="Button" Canvas.Left="57" Canvas.Top="283" Width="75"/>

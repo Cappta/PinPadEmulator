@@ -10,9 +10,6 @@ using System.Windows.Media.Imaging;
 
 namespace PinPadVirtual
 {
-	/// <summary>
-	/// Lógica interna para PinPad.xaml
-	/// </summary>
 	public partial class PinPad : Window
 	{
 		private Thread emulatorThread;
@@ -47,9 +44,15 @@ namespace PinPadVirtual
 
 		private void FillSerialPortDisplay()
 		{
-			if (this.ListsDisplay.Items.Count > 0) { this.ListsDisplay.Items.Clear(); }
-
 			var serialPorts = SerialPort.GetPortNames();
+
+			if (serialPorts.Length == 0 )
+			{
+				MessageBox.Show("Nenhuma porta COM encontrada!");
+				Application.Current.Shutdown();
+			}
+
+			if (this.ListsDisplay.Items.Count > 0) { this.ListsDisplay.Items.Clear(); }
 
 			foreach (var serialPort in serialPorts)
 			{
@@ -78,11 +81,16 @@ namespace PinPadVirtual
 			this.emulatorThread.Priority = ThreadPriority.Highest;
 		}
 
-		public void OnListenMessage(string message)
+		private void StopEmulatorThread()
 		{
-			this.Dispatcher.Invoke((() => { this.PinpadTextDisplay.Text = message; }));
+			this.emulatorThread.Abort();
 		}
 
+ 		public void OnListenMessage(string message)
+		{
+			this.Dispatcher.Invoke((() => { this.TranslactMessage(message); }));
+		}
+		
 		public static string[] SplitArguments(string commandLine)
 		{
 			var parmChars = commandLine.ToCharArray();
@@ -118,32 +126,13 @@ namespace PinPadVirtual
 			}
 		}
 
-
 		private void LeftArrow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			this.BackProcess();
 		}
 
-		private void BackProcess()
-		{
-			switch (this.MenuIndex)
-			{
-				case 1:
-					this.ActualSerialPort = null;
-					this.FillSerialPortDisplay();
-					this.LeftDisplayButton.Visibility = Visibility.Hidden;
-					break;
-				case 2:
-					break;
-				default:
-					break;
-			}
-			this.MenuIndex--;
-		}
-
 		private void RightArrow_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			if (this.MenuIndex == 2) { return; }
 			if (this.ListsDisplay.SelectedItems.Count <= 0)
 			{
 				MessageBox.Show("Por favor, selecione um item da lista antes de continuar!");
@@ -164,19 +153,40 @@ namespace PinPadVirtual
 					this.LeftDisplayButton.Visibility = Visibility.Visible;
 					break;
 				case 2:
-
-					//Mudar Setas
-
-					this.PinpadTextDisplay.Text = "Pronto para transacionar!";
-					//this.LeftDisplayButton.Source = new BitmapImage(new Uri(@"/imgs/stop.png", UriKind.Relative));
-					//this.RightDisplayButton.Source = new BitmapImage(new Uri(@"/imgs/check.png", UriKind.Relative));
-
+					this.RightDisplayButton.Visibility = Visibility.Hidden;
 					this.ListsDisplay.Visibility = Visibility.Hidden;
 					this.PinpadTextDisplay.Visibility = Visibility.Visible;
 					this.ActualScript = this.scriptFiles[this.ListsDisplay.SelectedIndex];
 					this.InitializeEmulatorThread();
 					break;
 			}
+		}
+
+		private void BackProcess()
+		{
+			switch (this.MenuIndex)
+			{
+				case 1:
+					this.ActualSerialPort = null;
+					this.FillSerialPortDisplay();
+					this.LeftDisplayButton.Visibility = Visibility.Hidden;
+					break;
+				case 2:
+					this.ActualScript = null;
+					this.FillScriptDisplay();
+					this.PinpadTextDisplay.Visibility = Visibility.Hidden;
+					this.RightDisplayButton.Visibility = Visibility.Visible;
+					this.ListsDisplay.Visibility = Visibility.Visible;
+					break;
+				default:
+					break;
+			}
+			this.MenuIndex--;
+		}
+
+		private void TranslactMessage(string message)
+		{
+			this.PinpadTextDisplay.Text = message;
 		}
 	}
 }

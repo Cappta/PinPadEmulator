@@ -42,9 +42,5 @@
 				<Image Name="RightDisplayButton" Height="18" Source="imgs/rightArrow.png" Canvas.Top="4" Canvas.Left="204" Width="20" MouseDown="RightArrow_MouseDown"/>
 			</Canvas>
 		</Grid>
-		<Button x:Name="DisplayDown" Content="Button" Canvas.Left="57" Canvas.Top="283" Width="75"/>
-		<Button x:Name="DisplayUp" Content="Button" Canvas.Left="160" Canvas.Top="278" Width="74"/>
-		<Button x:Name="GreenButton" Content="Button" Canvas.Left="160" Canvas.Top="449" Width="74"/>
-		<Button x:Name="RedButton" Content="Button" Canvas.Left="42" Canvas.Top="454" Width="74"/>
 	</Canvas>
 </Window>
